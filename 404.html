@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page not found · GreenSquare</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Self-contained: the 404 can be served from any path depth, so it carries its own styles. -->
+  <style>
+    :root { --green:#133f26; --green-deep:#0e2c1b; --green-500:#1c5638; --cream:#f5f5f5; --cream-soft:rgba(245,245,245,0.74); --lime:#DFF49F; --line-dark:rgba(245,245,245,0.16);
+      --serif:'Cormorant Garamond',Georgia,serif; --sans:'Manrope',-apple-system,system-ui,sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--green-deep); color:var(--cream); font-family:var(--sans); -webkit-font-smoothing:antialiased; }
+    .nf { min-height:100vh; display:grid; place-content:center; text-align:center; padding:24px; max-width:760px; margin-inline:auto; }
+    .eyebrow { font-size:0.72rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--lime); margin:0 0 1.2rem; }
+    h1 { font-family:var(--serif); font-weight:600; font-size:clamp(3rem,9vw,5.6rem); line-height:1.02; margin:0; }
+    p { color:var(--cream-soft); max-width:40ch; margin:1.2rem auto 0; font-size:1.1rem; line-height:1.6; }
+    .btn-row { display:flex; gap:0.85rem; justify-content:center; margin-top:2rem; flex-wrap:wrap; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; font-weight:600; font-size:0.95rem; padding:0.9rem 1.6rem; border-radius:4px; border:1px solid transparent; text-decoration:none; transition:background .2s, border-color .2s; }
+    .btn-light { background:var(--cream); color:var(--green-deep); }
+    .btn-light:hover { background:#fff; }
+    .btn-outline { background:transparent; color:var(--cream); border-color:var(--line-dark); }
+    .btn-outline:hover { border-color:var(--cream); }
+    a:focus-visible, .btn:focus-visible { outline:2px solid var(--lime); outline-offset:2px; }
+  </style>
+</head>
+<body>
+  <main class="nf">
+    <p class="eyebrow">404</p>
+    <h1>This page took a detour.</h1>
+    <p>The page you wanted is not here. The decision about where to go next, happily, is an easy one.</p>
+    <div class="btn-row">
+      <a class="btn btn-light" href="/">Back to home</a>
+      <a class="btn btn-outline" href="/product.html">See the product</a>
+    </div>
+  </main>
+</body>
+</html>

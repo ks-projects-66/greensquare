@@ -1,0 +1,13 @@
+# Dependencies (only used locally to generate assets; not part of the static site)
+node_modules/
+package-lock.json
+package.json
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.log
+
+# Local QA artefacts
+/_qa/
+/screenshots/
