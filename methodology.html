@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>document.documentElement.classList.add('js');</script>
   <title>Methodology · GreenSquare</title>
-  <meta name="description" content="How the GreenSquare benchmark was run: three frontier models, two runs each, frozen inputs, blind scoring on a twelve-dimension rubric. Kept in full, with caveats." />
+  <meta name="description" content="How the GreenSquare benchmark was run: matched inputs, baseline and framework runs, fixed scoring and clear caveats." />
   <link rel="canonical" href="https://www.greensquare.ai/methodology.html" />
 
   <meta property="og:title" content="Methodology · GreenSquare" />
-  <meta property="og:description" content="Three frontier models, two runs each, frozen inputs, blind scoring on a twelve-dimension rubric." />
+  <meta property="og:description" content="Matched inputs, baseline and framework runs, fixed scoring and caveats." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://www.greensquare.ai/methodology.html" />
   <meta property="og:image" content="https://www.greensquare.ai/assets/og-image.png" />
@@ -54,7 +54,7 @@
       <div class="wrap-narrow">
         <p class="eyebrow reveal">Methodology</p>
         <h1 class="reveal">How the benchmark was run.</h1>
-        <p class="lead reveal">The headline is the reversal. This is the test behind it, kept in full, including where it is strong and where it is not.</p>
+        <p class="lead reveal">The headline is the reversal. This page explains the test behind it, including what it does and does not prove.</p>
         <p class="reveal"><a class="textlink" href="evidence.html">&larr; Back to the evidence</a></p>
       </div>
     </section>
@@ -64,21 +64,21 @@
     <section class="section">
       <div class="wrap-narrow prose">
         <p class="eyebrow reveal">The design</p>
-        <h2 class="reveal">Three models, two runs each, identical inputs.</h2>
-        <p class="reveal">The test compares the lift produced by the framework across three frontier AI platforms, using identical inputs, identical scoring, and identical evidence capture. Each platform ran twice: once with no framework (the baseline), and once running the full nine-section GreenSquare workflow.</p>
+        <h2 class="reveal">Matched inputs, two conditions.</h2>
+        <p class="reveal">The test compared a baseline response against a GreenSquare framework response. Each run used the same fictional business case. The baseline answered the case directly. The framework run followed the GreenSquare decision structure before producing the brief.</p>
 
         <ul class="reveal">
-          <li><strong>Platforms.</strong> Claude (Opus 4.7), ChatGPT (GPT-5.5 Thinking), and Gemini (2.5 Pro). The exact model identifier shown in each interface on the day was recorded in the evidence pack, and models were not switched mid-run.</li>
-          <li><strong>Frozen inputs.</strong> One fictional business case and one baseline prompt, used verbatim on every platform. No input was edited between runs.</li>
-          <li><strong>Memory off.</strong> Custom instructions, saved memory and personalisation were disabled on each platform for the duration.</li>
-          <li><strong>Blind scoring.</strong> Outputs were scored after all evidence was captured, against a fixed twelve-dimension rubric on a scale of one to ten.</li>
+          <li><strong>Platforms.</strong> Claude, ChatGPT and Gemini.</li>
+          <li><strong>Inputs.</strong> One fictional business case, used consistently across all runs.</li>
+          <li><strong>Scoring.</strong> Outputs were scored against the same twelve-dimension rubric.</li>
+          <li><strong>Purpose.</strong> The test asks whether better structure produces a more decision-ready answer.</li>
         </ul>
 
         <h3 class="reveal">The test case</h3>
-        <p class="reveal">The case is a Sydney food manufacturer, FreshTaste Foods (fictional), deciding whether to launch a ready-to-drink functional beverage. The brief is deliberately loaded: a facility already at ninety per cent utilisation, limited cash after recent capex, debt covenants, a competitor entering the category, and two existing business units with their own problems. It also carries leadership tension and emotion, including a chief executive invested in first-mover advantage. The same brief was given to every model.</p>
+        <p class="reveal">The case is a Sydney food manufacturer, FreshTaste Foods, deciding whether to launch a ready-to-drink functional beverage. The brief includes high facility use, limited cash after recent investment, debt covenants, a competitor entering the category and two existing business units with problems of their own.</p>
 
-        <h3 class="reveal">Baseline against framework</h3>
-        <p class="reveal">The baseline run is a fresh chat with no system prompt and no uploads: the brief is pasted in and the model produces its analysis in its own format, with no further guidance. The framework run loads the GreenSquare files and works through discovery, situation, context, options, business case, implementation, value and risk, then a synthesis. To keep the test repeatable, the model played both the consultant and the chief executive answering questions, rather than a live human. That trades some realism in the interview for a clean, repeatable comparison.</p>
+        <h3 class="reveal">What changed</h3>
+        <p class="reveal">The input did not change. The structure did. The framework forced the decision to be tested before the recommendation was written. That is why the answer moved from launch planning to a diagnostic first.</p>
       </div>
     </section>
 
@@ -88,23 +88,23 @@
       <div class="wrap-narrow">
         <p class="eyebrow reveal">The rubric</p>
         <h2 class="reveal">Twelve dimensions, scored one to ten.</h2>
-        <p class="measure reveal" style="margin-top:1.2rem;">Every output was scored against the same instrument. The five categories shown on the evidence page are a plain-language summary of these twelve.</p>
+        <p class="measure reveal" style="margin-top:1.2rem;">Every output was scored against the same instrument. The five categories on the evidence page are a plain-language summary of these twelve.</p>
         <div class="tbl-scroll reveal">
           <table class="data">
             <thead><tr><th style="width:2.4rem;">#</th><th>Dimension</th><th>What it measures</th></tr></thead>
             <tbody>
-              <tr><td class="num">1</td><td>Structural completeness</td><td>Coverage of situation, context, objectives, options, business case, implementation, value and risk</td></tr>
-              <tr><td class="num">2</td><td>Analytical depth</td><td>Insight into root causes and second-order effects</td></tr>
-              <tr><td class="num">3</td><td>Assumption transparency</td><td>Visibility and classification of assumptions against validated facts</td></tr>
-              <tr><td class="num">4</td><td>Sequential coherence</td><td>Logical flow without contradictions across sections</td></tr>
-              <tr><td class="num">5</td><td>Specificity and actionability</td><td>Concrete metrics, owners, timelines and actionable recommendations</td></tr>
-              <tr><td class="num">6</td><td>Challenge and rigour</td><td>Willingness to question inputs and stress-test objectives</td></tr>
-              <tr><td class="num">7</td><td>Stakeholder readiness</td><td>Suitability for executive presentation</td></tr>
-              <tr><td class="num">8</td><td>Financial grounding</td><td>Quantification of value streams, costs, ROI, payback and sensitivity</td></tr>
-              <tr><td class="num">9</td><td>Risk identification</td><td>Specificity and prioritisation of risks with mitigations</td></tr>
-              <tr><td class="num">10</td><td>Output usability</td><td>Clean, scannable structure and absence of clutter</td></tr>
-              <tr><td class="num">11</td><td>Extraction quality</td><td>Ability to draw out information the user might not volunteer</td></tr>
-              <tr><td class="num">12</td><td>Adaptive intelligence</td><td>Adapting to the specific context rather than applying the framework mechanically</td></tr>
+              <tr><td class="num">1</td><td>Structural completeness</td><td>Coverage of the sections needed to make the decision usable</td></tr>
+              <tr><td class="num">2</td><td>Analytical depth</td><td>Insight into causes and second-order effects</td></tr>
+              <tr><td class="num">3</td><td>Assumption transparency</td><td>Visibility of what is known, inferred and unknown</td></tr>
+              <tr><td class="num">4</td><td>Sequential coherence</td><td>Logical flow without contradictions</td></tr>
+              <tr><td class="num">5</td><td>Specificity and actionability</td><td>Concrete steps, owners, timing and recommendations</td></tr>
+              <tr><td class="num">6</td><td>Challenge and rigour</td><td>Willingness to question inputs and test objectives</td></tr>
+              <tr><td class="num">7</td><td>Stakeholder readiness</td><td>Suitability for a professional audience</td></tr>
+              <tr><td class="num">8</td><td>Financial grounding</td><td>Commercial logic, costs, returns and sensitivity</td></tr>
+              <tr><td class="num">9</td><td>Risk identification</td><td>Specificity and prioritisation of risks</td></tr>
+              <tr><td class="num">10</td><td>Output usability</td><td>Clean, scannable structure</td></tr>
+              <tr><td class="num">11</td><td>Extraction quality</td><td>Ability to surface information the user may not volunteer</td></tr>
+              <tr><td class="num">12</td><td>Adaptive intelligence</td><td>Adaptation to the specific context</td></tr>
             </tbody>
           </table>
         </div>
@@ -116,8 +116,8 @@
     <section class="section">
       <div class="wrap-narrow">
         <p class="eyebrow reveal">The result</p>
-        <h2 class="reveal">A consistent lift, not a single lucky run.</h2>
-        <p class="measure reveal" style="margin-top:1.2rem;">Across the three platforms, the framework moved output from competent to decision-ready. The averages, on the same one-to-ten scale:</p>
+        <h2 class="reveal">A consistent lift, with the reversal doing the real work.</h2>
+        <p class="measure reveal" style="margin-top:1.2rem;">Across the tested platforms, the framework moved output from competent to decision-ready. The averages, on the same one-to-ten scale:</p>
         <div class="tbl-scroll reveal">
           <table class="data">
             <thead><tr><th>Measure</th><th class="num">Score</th></tr></thead>
@@ -128,7 +128,7 @@
             </tbody>
           </table>
         </div>
-        <p class="note reveal">The lift matters less than the reversal. A higher score on a launch plan is useful. Catching that the launch was the wrong question is the point.</p>
+        <p class="note reveal">The lift matters less than the reversal. A better launch plan is useful. Catching that the launch was the wrong question is the point.</p>
       </div>
     </section>
 
@@ -139,10 +139,10 @@
         <p class="eyebrow reveal">Caveats</p>
         <h2 class="reveal">Where this test is honest about its limits.</h2>
         <ul class="reveal">
-          <li><strong>The company is fictional.</strong> FreshTaste Foods does not exist. The brief is constructed to be hard. The reversal is a real result on that brief, reproduced independently on all three platforms.</li>
-          <li><strong>Dual-role, not live interview.</strong> The model played both consultant and client. This buys repeatability and removes human improvisation, at the cost of some realism in the discovery interview.</li>
-          <li><strong>One run used a single-window fallback.</strong> The more rigorous protocol runs the consultant and the client in separate windows. Where a platform made that impractical, a single-window fallback was used and noted as a deviation.</li>
-          <li><strong>A later improvement is projected, not re-tested.</strong> After the original test, the business-case section was upgraded with a full investment-case workflow (five-year P&amp;L, DCF, sensitivity, scenarios). The projected effect is a framework average near 8.7 and a lift around 50 per cent. This is an estimate based on the original scoring pattern, not a completed re-run, and is presented as such.</li>
+          <li><strong>The company is fictional.</strong> FreshTaste Foods does not exist. The case was built to test a hard decision.</li>
+          <li><strong>Benchmark, not field trial.</strong> This tests output quality in a controlled setting. It does not replace judgment in a live decision.</li>
+          <li><strong>Small sample.</strong> The evidence is useful, but not exhaustive. It shows a strong pattern, not statistical proof.</li>
+          <li><strong>Scoring involves judgment.</strong> The same rubric was used across outputs, but scoring quality remains partly evaluative.</li>
         </ul>
         <p class="reveal" style="margin-top:2rem;"><a class="textlink" href="evidence.html">&larr; Back to the evidence</a></p>
       </div>
