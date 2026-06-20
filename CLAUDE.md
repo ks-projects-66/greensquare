@@ -65,7 +65,7 @@ Flat static site, no build step. Served from the repo root.
 | `404.html` | Branded not-found page |
 | `assets/styles.css` | The entire design system. One stylesheet for all pages. |
 | `assets/site.js` | Scroll reveal, mobile nav, reduced-motion handling |
-| `assets/*.mp4 / *.jpg / *.svg / og-image.png` | Media |
+| `assets/*.mp4 / *.jpg / *.svg / og-image.png` | Media. `hero.mp4` is a custom Remotion render (source: `../greensquare-animation/src/Hero.tsx`, composition `Hero`); re-render and copy it in to change the hero. |
 | `sitemap.xml`, `robots.txt` | SEO. URLs point at the production domain `www.greensquare.ai`. |
 
 Navigation is multi-page (Home / Product / Evidence). Footer also links Methodology and

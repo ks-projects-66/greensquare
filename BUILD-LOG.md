@@ -47,3 +47,10 @@ No benchmark numbers were invented.
 4. One thing to flag: the demo video (`GreenSquareDemoV2`) shows a "Download Board Pack" label in its
    UI. Your brand rule avoids "board-ready" framing. The on-page copy never uses it, but the wording is
    baked into the video. Worth a re-render of that asset when convenient.
+
+## Update: custom hero video
+The original hero clip (a generic stock video with a "Veo" watermark) was replaced with a custom,
+watermark-free Remotion animation: a seamlessly-looping GreenSquare mark on a deep-green field. Source
+is `greensquare-animation/src/Hero.tsx` (composition `Hero`, 1280x720, 6s loop). Rendered with
+`remotion render src/index.ts Hero out/hero.mp4`, then `hero.mp4` and a still poster were copied into
+`assets/`. The Remotion install was repaired and the renderer verified working.
