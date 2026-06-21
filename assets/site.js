@@ -3,6 +3,16 @@
 (function () {
   'use strict';
 
+  /* ---- Premium spacing refinement layer ---- */
+  try {
+    if (!document.querySelector('link[href="assets/premium-spacing.css"]')) {
+      var spacing = document.createElement('link');
+      spacing.rel = 'stylesheet';
+      spacing.href = 'assets/premium-spacing.css';
+      document.head.appendChild(spacing);
+    }
+  } catch (e) {}
+
   /* ---- Scroll reveal ---- */
   var els = document.querySelectorAll('.reveal');
   function showAll() { els.forEach(function (el) { el.classList.add('in'); }); }
