@@ -1,0 +1,92 @@
+/* GreenSquare premium spacing refinement layer.
+   This file corrects the compressed feel after the editorial redesign without changing product logic. */
+
+:root {
+  --space-section: clamp(5.75rem, 9vw, 9rem);
+  --space-section-tight: clamp(4.5rem, 7vw, 6.5rem);
+  --space-hero: clamp(6.6rem, 11vw, 10rem);
+  --space-gap-lg: clamp(3rem, 7vw, 6rem);
+  --space-gap-md: clamp(2rem, 5vw, 4rem);
+}
+
+.section { padding-block: var(--space-section) !important; }
+.section-paper { padding-block: var(--space-section) !important; }
+.article-hero { padding-block: var(--space-section-tight) !important; }
+.hero-layout { padding-block: var(--space-hero) !important; gap: var(--space-gap-lg) !important; }
+.split-grid, .cta-grid, .price-wrap { gap: var(--space-gap-lg) !important; }
+.section-intro { margin-bottom: clamp(3rem, 6vw, 5rem) !important; }
+.statement-band .wrap { padding-block: clamp(3.4rem, 6vw, 5.2rem) !important; }
+
+.hero-copy .lead, .article-hero .lead, .product-hero .lead { margin-top: clamp(1.4rem, 2.5vw, 2rem); }
+.action-row { margin-top: clamp(2rem, 4vw, 2.8rem) !important; gap: 1.05rem 1.35rem !important; }
+.quiet-label { margin-bottom: 1.25rem !important; }
+h2 + p, h3 + p { margin-top: 1rem; }
+
+.brief-specimen,
+.document-card,
+.price-card,
+.side-note,
+.proof-card,
+.result-card,
+.score-card,
+.frame-sheet { padding: clamp(1.75rem, 3.5vw, 2.75rem) !important; }
+
+.method-grid article,
+.output-grid article { padding: clamp(1.75rem, 3.4vw, 2.6rem) !important; min-height: 270px; }
+.method-grid h3,
+.output-grid h3 { margin-top: 1.2rem !important; margin-bottom: 0.75rem !important; }
+.method-grid p,
+.output-grid p { line-height: 1.58; }
+
+.clean-list { margin-top: 2rem !important; }
+.clean-list li { padding: 1.05rem 0 !important; }
+.feature-list { gap: 1.35rem !important; }
+.feature-list article { padding-top: 1.25rem !important; }
+.proof-card { align-items: start; }
+.proof-compare div,
+.evidence-ledger div { padding: clamp(1.75rem, 4vw, 3.25rem) !important; }
+.ledger-note { margin-top: clamp(2rem, 4vw, 3rem) !important; }
+.score-row { padding: 1.1rem 0 !important; }
+.method-table { margin-block: 2.3rem !important; }
+.frame-item { padding-block: 1.25rem !important; }
+
+@media (max-width: 1040px) {
+  .method-grid article,
+  .output-grid article { min-height: 220px; }
+}
+
+@media (max-width: 860px) {
+  :root {
+    --space-section: clamp(4.8rem, 13vw, 6.5rem);
+    --space-section-tight: clamp(4rem, 11vw, 5.6rem);
+    --space-hero: clamp(4.7rem, 14vw, 6.6rem);
+    --space-gap-lg: clamp(2.35rem, 8vw, 3.8rem);
+  }
+  .hero-layout { align-items: start; }
+  .brief-specimen { margin-top: 0.4rem; }
+  .section-intro { margin-bottom: clamp(2.2rem, 8vw, 3.4rem) !important; }
+  .method-grid article,
+  .output-grid article { min-height: auto; }
+  .cta-grid .btn { width: 100%; }
+}
+
+@media (max-width: 620px) {
+  h1 { line-height: 0.98 !important; }
+  h2 { line-height: 1.04 !important; }
+  .lead { line-height: 1.5 !important; }
+  .hero-layout { gap: 2.4rem !important; }
+  .statement-band p { line-height: 1.12 !important; }
+  .brief-specimen,
+  .document-card,
+  .price-card,
+  .side-note,
+  .proof-card,
+  .result-card,
+  .score-card,
+  .frame-sheet { padding: 1.45rem !important; }
+  .proof-compare div,
+  .evidence-ledger div { padding: 1.45rem !important; }
+  .mini-compare { gap: 0.75rem !important; }
+  .specimen-foot { gap: 0.65rem !important; }
+  .form-row { gap: 0.9rem !important; }
+}
