@@ -9,6 +9,12 @@
   --space-gap-md: clamp(2rem, 5vw, 4rem);
 }
 
+/* Remove all visible eyebrow-style headers. */
+.quiet-label,
+.eyebrow,
+.doc-kicker,
+.price-label { display: none !important; margin: 0 !important; }
+
 .section { padding-block: var(--space-section) !important; }
 .section-paper { padding-block: var(--space-section) !important; }
 .article-hero { padding-block: var(--space-section-tight) !important; }
@@ -19,8 +25,7 @@
 
 .hero-copy .lead, .article-hero .lead, .product-hero .lead { margin-top: clamp(1.4rem, 2.5vw, 2rem); }
 .action-row { margin-top: clamp(2rem, 4vw, 2.8rem) !important; gap: 1.05rem 1.35rem !important; }
-.quiet-label { margin-bottom: 1.25rem !important; }
-h2 + p, h3 + p { margin-top: 1rem; }
+h1 + .lead, h2 + p, h3 + p { margin-top: 1rem; }
 
 .brief-specimen,
 .document-card,
