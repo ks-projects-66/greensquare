@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Same case, same data, different decision</title>
+  <meta name="robots" content="noindex" />
+  <!-- Self-contained animation, embedded as an iframe on index.html and evidence.html.
+       Carries its own fonts and styles so it never depends on the host page. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green:#133f26; --deep:#0e2c1b; --bg:#f5f2eb; --paper:#fffdf8; --paper2:#f3f7ed;
+      --ink:#12140f; --soft:#626258; --muted:#8a887c; --lime:#dff49f; --lime-soft:#eef7d6;
+      --line:#ded8cc; --line2:#c9c0b2;
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'Manrope',-apple-system,system-ui,sans-serif;
+    }
+    * { box-sizing:border-box; }
+    html,body { height:100%; }
+    body {
+      margin:0; background:var(--paper); color:var(--ink);
+      font-family:var(--sans); -webkit-font-smoothing:antialiased;
+      display:grid; place-items:center; padding:clamp(18px,3.5vw,38px); overflow:hidden;
+    }
+    .stage { width:100%; max-width:940px; display:flex; flex-direction:column; gap:clamp(.9rem,2vw,1.4rem); }
+
+    /* The shared case prompt */
+    .case {
+      background:var(--deep); color:#f1efe6; border-radius:14px;
+      padding:clamp(1rem,2.4vw,1.5rem) clamp(1.1rem,2.6vw,1.7rem);
+      display:flex; flex-direction:column; gap:.45rem;
+      opacity:0; animation:revealCase 13s ease-in-out infinite both;
+    }
+    .case .tag { font-size:.7rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--lime); }
+    .case .q { font-family:var(--serif); font-weight:600; font-size:clamp(1.25rem,2.8vw,1.85rem); line-height:1.1; }
+    .case .ctx { margin:0; font-size:clamp(.82rem,1.5vw,.92rem); color:rgba(241,239,230,.72); line-height:1.5; }
+
+    .fork { display:grid; grid-template-columns:1fr 1fr; gap:clamp(.7rem,1.8vw,1.2rem); align-items:stretch; }
+
+    .col {
+      background:var(--bg); border:1px solid var(--line); border-radius:14px;
+      padding:clamp(1rem,2.4vw,1.5rem); display:flex; flex-direction:column; gap:.5rem;
+      opacity:0;
+    }
+    .col--base { animation:revealBase 13s ease-in-out infinite both; }
+    .col--gs   { animation:revealGs 13s ease-in-out infinite both; border-color:var(--line2); }
+    .col .who { font-size:.72rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); }
+    .col--gs .who { color:var(--green); }
+    .verdict { font-family:var(--serif); font-weight:600; font-size:clamp(1.4rem,3.2vw,2.15rem); line-height:1.04; color:var(--ink); margin:.1rem 0; opacity:0; }
+    .ans-base .verdict { animation:fadeUp 13s ease-in-out infinite both; }
+    .sub { margin:0; font-size:clamp(.84rem,1.5vw,.95rem); color:var(--soft); line-height:1.45; opacity:0; }
+    .ans-base .sub { animation:fadeUp 13s ease-in-out infinite both; }
+
+    .ans-gs .verdict { color:var(--green); animation:fadeUpGs 13s ease-in-out infinite both; }
+    .ans-gs .sub { animation:fadeUpGs 13s ease-in-out infinite both; }
+    .reframe {
+      margin-top:.3rem; background:var(--paper); border-left:3px solid var(--green); border-radius:0 8px 8px 0;
+      padding:.7rem .85rem; font-size:clamp(.84rem,1.5vw,.95rem); line-height:1.45; color:var(--ink);
+      opacity:0; animation:revealReframe 13s ease-in-out infinite both;
+    }
+    .reframe strong { color:var(--green); font-weight:800; }
+
+    /* Timeline (13s loop): case -> baseline -> greensquare -> reframe -> hold -> reset */
+    @keyframes revealCase   { 0%{opacity:0;transform:translateY(10px);} 7%{opacity:1;transform:none;} 93%{opacity:1;transform:none;} 100%{opacity:0;} }
+    @keyframes revealBase   { 0%,14%{opacity:0;transform:translateY(10px);} 21%{opacity:1;transform:none;} 93%{opacity:1;transform:none;} 100%{opacity:0;} }
+    @keyframes fadeUp       { 0%,24%{opacity:0;transform:translateY(8px);} 31%{opacity:1;transform:none;} 93%{opacity:1;transform:none;} 100%{opacity:0;} }
+    @keyframes revealGs     { 0%,40%{opacity:0;transform:translateY(10px);} 47%{opacity:1;transform:none;} 93%{opacity:1;transform:none;} 100%{opacity:0;} }
+    @keyframes fadeUpGs     { 0%,50%{opacity:0;transform:translateY(8px);} 57%{opacity:1;transform:none;} 93%{opacity:1;transform:none;} 100%{opacity:0;} }
+    @keyframes revealReframe{
+      0%,62%{opacity:0;transform:translateY(10px);background:var(--paper);}
+      69%{opacity:1;transform:none;background:var(--lime-soft);}
+      77%{background:var(--paper);}
+      83%{background:var(--lime-soft);}
+      90%{background:var(--paper);}
+      93%{opacity:1;transform:none;}
+      100%{opacity:0;}
+    }
+
+    @media (max-width:720px) {
+      .fork { grid-template-columns:1fr; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .case,.col,.verdict,.sub,.reframe { animation:none !important; opacity:1 !important; transform:none !important; }
+      .reframe { background:var(--lime-soft); }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage" role="img" aria-label="The same decision case produces two answers: a baseline that says launch the product, and a GreenSquare run that says do not launch yet because the launch was masking the real trade-off.">
+    <div class="case">
+      <span class="tag">The same case</span>
+      <span class="q">Should we launch the new product line?</span>
+      <p class="ctx">A mid-sized manufacturer, same inputs, tight cash and capacity. One question, asked of the model two ways.</p>
+    </div>
+
+    <div class="fork">
+      <div class="col col--base ans-base">
+        <span class="who">Baseline</span>
+        <span class="verdict">Launch the product.</span>
+        <p class="sub">A capable plan that accepts the question exactly as it was asked.</p>
+      </div>
+
+      <div class="col col--gs ans-gs">
+        <span class="who">With GreenSquare</span>
+        <span class="verdict">Do not launch yet.</span>
+        <p class="sub">It tested whether launch was even the right decision to be making.</p>
+        <div class="reframe"><strong>The reframe:</strong> launch was masking the real trade-off. Run the diagnostic first.</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

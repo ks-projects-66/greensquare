@@ -48,6 +48,25 @@ No benchmark numbers were invented.
    UI. Your brand rule avoids "board-ready" framing. The on-page copy never uses it, but the wording is
    baked into the video. Worth a re-render of that asset when convenient.
 
+## Update: embedded section animations
+Two self-contained HTML animations were added under `animations/` and embedded as iframes:
+- `greensquare-three-steps.html`: the "Three steps, no setup" flow (load one file, answer the
+  questions, get the brief). Embedded on `index.html` (new "How it works" section) and `product.html`
+  (between the five-part output and pricing).
+- `greensquare-explainer.html`: the reversal (same case, two answers: "Launch the product." vs
+  "Do not launch yet."), copy kept consistent with the evidence page. Embedded on `index.html`
+  (the evidence teaser, replacing the static compare card) and `evidence.html` (below the ledger).
+
+Each animation carries its own fonts and brand tokens so it never depends on the host page, loops on a
+fixed timeline, is `noindex`, and degrades to its final composed state under `prefers-reduced-motion`.
+Responsive embed wrappers (`.embed-frame`, `--explainer` / `--steps`) live in `styles.css`; they use
+`aspect-ratio` so heights are never hard-coded. The `404.html` brand mark now animates (the four
+quadrants assemble on load, with a reduced-motion fallback).
+
+These came from a separate `new-animations/` design folder whose pages used a different, dead CSS class
+system and referenced two animation files that did not exist. Rather than swap in those broken pages,
+the animation intent was rebuilt against the live design system and wired into the existing sections.
+
 ## Update: custom hero video
 The original hero clip (a generic stock video with a "Veo" watermark) was replaced with a custom,
 watermark-free Remotion animation: a seamlessly-looping GreenSquare mark on a deep-green field. Source

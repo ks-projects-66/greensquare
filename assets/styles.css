@@ -49,3 +49,12 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:600;letter-spacing:-.012em;marg
   .hero-media{align-self:stretch;min-height:0}
   .hero-media .frame-video{height:auto;aspect-ratio:16/9}
 }
+
+/* ===== Embedded animations (self-contained iframes) ===== */
+.embed-frame{position:relative;width:100%;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--paper);box-shadow:0 26px 70px -54px rgba(18,20,15,.5);margin-top:clamp(1.8rem,3.5vw,2.6rem)}
+.embed-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.embed-frame--explainer{aspect-ratio:16/8.6}
+.embed-frame--steps{aspect-ratio:16/6}
+.embed-caption{margin:.95rem 0 0;color:var(--muted);font-size:.86rem;text-align:center}
+@media(max-width:780px){.embed-frame--steps{aspect-ratio:3/4.3}}
+@media(max-width:720px){.embed-frame--explainer{aspect-ratio:3/4}}
