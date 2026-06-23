@@ -11,3 +11,10 @@ Thumbs.db
 # Local QA artefacts
 /_qa/
 /screenshots/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
