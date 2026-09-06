@@ -2,43 +2,42 @@
 import { withBase } from '../lib/paths';
 import BaseLayoutV2 from '../layouts/BaseLayoutV2.astro';
 import EmailCaptureForm from '../components/EmailCaptureForm.tsx';
-import ThroughFlowHero from '../components/ThroughFlowHero.astro';
+import FrameProcessAnimation from '../components/FrameProcessAnimation.astro';
 
 const capabilities = [
-  { label: 'Frame', title: 'Clarify the decision before solving it', body: 'GreenSquare identifies the mandate, decision owner, stakes and evidence needed before a recommendation can be credible.' },
+  { label: 'Clarify', title: 'Define the decision before solving it', body: 'Frame identifies the mandate, decision owner, stakes and evidence needed before a recommendation can be credible.' },
   { label: 'Challenge', title: 'Expose assumptions and missing evidence', body: 'It separates what is known from what is inferred, tests contradictions and keeps uncertainty visible where it can still change the call.' },
   { label: 'Decide', title: 'Compare real options and define the path', body: 'It evaluates distinct choices consistently, recommends only when the evidence permits and carries decision conditions into action.' },
 ];
 ---
 <BaseLayoutV2
   title="GreenSquare AI | Professional judgement for consequential decisions"
-  description="GreenSquare adds a disciplined professional judgement process to the AI you already use, from the first material question to an inspectable decision."
+  description="Frame adds a disciplined professional judgement process to the AI you already use, from the first material question to an inspectable decision."
   current="home"
 >
-  <section class="home-hero v-off">
-    <div class="v-container home-hero__grid">
-      <div class="home-hero__copy">
-        <p class="v-index">Professional judgement for AI</p>
-        <h1 class="v-display">Make better use of capable AI when the decision matters.</h1>
-        <p class="v-lead">
-          GreenSquare gives AI a disciplined process for consequential business decisions. It clarifies the real
-          choice, interrogates the evidence and makes the recommendation easier to inspect before you act.
-        </p>
-        <div class="hero-actions">
-          <a class="v-btn v-btn--green" href={withBase('/free/')}>Try GreenSquare Free</a>
-          <a class="v-link" href={withBase('/product/')}>See how GreenSquare works</a>
-        </div>
-      </div>
-      <div class="home-hero__visual">
-        <ThroughFlowHero />
+  <section class="home-hero v-hero v-hero--marketing">
+    <div class="v-container">
+      <h1 class="v-display">Make better use of capable AI when the decision matters.</h1>
+      <p class="v-lead">
+        Frame gives AI a disciplined process for consequential business decisions. It clarifies the real
+        choice, interrogates the evidence and makes the recommendation easier to inspect before you act.
+      </p>
+      <div class="hero-actions">
+        <a class="v-btn v-btn--green" href={withBase('/free/')}>Try Frame Free</a>
+        <a class="v-link" href={withBase('/product/')}>See how Frame works</a>
       </div>
     </div>
   </section>
 
+  <div class="v-container">
+    <div class="v-hero__visual">
+      <FrameProcessAnimation animated />
+    </div>
+  </div>
+
   <section class="v-section">
     <div class="v-container">
       <div class="section-intro">
-        <p class="v-index">The problem</p>
         <h2 class="v-h2">A fluent answer is not the same as a sound decision.</h2>
         <p class="v-lead">AI can analyse and write at speed. It does not automatically know which question matters, which assumption carries the risk or what evidence should change the call.</p>
       </div>
@@ -54,22 +53,21 @@ const capabilities = [
     </div>
   </section>
 
-  <section class="v-section v-green">
+  <section class="v-section">
     <div class="v-container product-intro">
       <div>
-        <p class="v-index">One product, two plans</p>
         <h2 class="v-h2">Start with the current beta.</h2>
       </div>
-      <p class="v-lead">GreenSquare Free is the current adaptive beta. GreenSquare Pro is the paid plan that will follow and remains in development.</p>
+      <p class="v-lead">Frame Free is the current adaptive beta. Frame Pro is the paid plan that will follow and remains in development.</p>
     </div>
     <div class="v-container plan-grid">
       <article class="plan-card plan-card--available">
-        <div><span class="plan-state">Available now</span><h3>GreenSquare Free</h3></div>
+        <div><span class="plan-state">Available now</span><h3>Frame Free</h3></div>
         <p>An adaptive decision system you upload to a capable AI model. It moves from mandate and evidence through options, recommendation and proportionate execution.</p>
-        <a class="v-btn v-btn--green" href={withBase('/free/')}>Try GreenSquare Free</a>
+        <a class="v-btn v-btn--green" href={withBase('/free/')}>Try Frame Free</a>
       </article>
       <article class="plan-card">
-        <div><span class="plan-state">In development</span><h3>GreenSquare Pro</h3></div>
+        <div><span class="plan-state">In development</span><h3>Frame Pro</h3></div>
         <p>The future paid plan. Its scope, features and pricing will be published only when the product boundary is ready.</p>
         <a class="v-link" href={withBase('/product/#pro')}>View the product direction</a>
       </article>
@@ -79,7 +77,6 @@ const capabilities = [
   <section class="v-section research-strip">
     <div class="v-container research-strip__grid">
       <div>
-        <p class="v-index">Research</p>
         <h2 class="v-h2">Evidence with its boundary intact.</h2>
       </div>
       <div>
@@ -89,11 +86,11 @@ const capabilities = [
     </div>
   </section>
 
-  <section class="home-cta v-fill">
+  <section class="home-cta v-section v-green">
     <div class="v-container home-cta__grid">
       <div>
-        <h2 class="v-h2">Bring GreenSquare to your next consequential decision.</h2>
-        <p class="v-lead">Enter your email, confirm your address and receive GreenSquare Free.</p>
+        <h2 class="v-h2">Bring Frame to your next consequential decision.</h2>
+        <p class="v-lead">Enter your email, confirm your address and receive Frame Free.</p>
       </div>
       <EmailCaptureForm client:visible />
     </div>
@@ -101,15 +98,12 @@ const capabilities = [
 </BaseLayoutV2>
 
 <style>
-  .home-hero { overflow: hidden; }
-  .home-hero__grid { display: grid; grid-template-columns: 1fr 1fr; min-height: clamp(560px, 70vh, 760px); align-items: stretch; }
-  .home-hero__copy { align-self: center; max-width: 42rem; padding-block: clamp(3.5rem, 7vw, 6.5rem); padding-right: clamp(2rem, 5vw, 5rem); }
-  .home-hero__copy .v-display { margin-top: var(--v-4); }
-  .home-hero__copy .v-lead { margin-top: var(--v-6); }
-  .home-hero__visual { min-width: 50vw; margin-right: calc(50% - 50vw); }
   .hero-actions { display: flex; align-items: center; gap: var(--v-5); flex-wrap: wrap; margin-top: var(--v-8); }
-  .section-intro { display: grid; grid-template-columns: .45fr 1fr; gap: var(--v-8); align-items: start; }
-  .section-intro .v-lead { grid-column: 2; margin-top: var(--v-3); }
+  /* Was a two-column grid with the eyebrow filling the narrow .45fr label column.
+     With the eyebrow removed the heading has nothing to sit beside, so this is a
+     single measured block; h1/h2-to-lead spacing now comes from the shared rule
+     in global-v2.css rather than a page-local override. */
+  .section-intro { max-width: 50rem; }
   .home-capabilities { margin-top: var(--v-10); border-top: 2px solid var(--v-ink); }
   .home-capabilities article { display: grid; grid-template-columns: 7rem minmax(14rem, .75fr) minmax(18rem, 1.25fr); gap: var(--v-6); padding: var(--v-6) 0; border-bottom: 1px solid var(--v-line); }
   .home-capabilities article > span { color: var(--v-green); font-weight: 600; }
@@ -122,14 +116,13 @@ const capabilities = [
   .plan-card h3 { margin-top: var(--v-2); color: var(--v-ink); font-size: clamp(1.7rem, 3vw, 2.5rem); }
   .plan-card p { color: var(--v-ink-soft); }
   .plan-card > :last-child { margin-top: auto; }
-  .plan-state { color: var(--v-ink-faint); font-size: var(--vs-label); font-weight: 600; }
+  .plan-state { color: var(--v-ink-soft); font-size: var(--vs-label); font-weight: 600; }
   .research-strip__grid, .home-cta__grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(3rem, 8vw, 8rem); align-items: center; }
   .research-strip .v-link { display: inline-block; margin-top: var(--v-5); }
   .home-cta { padding-block: clamp(4rem, 7vw, 6rem); }
   @media (max-width: 900px) {
-    .home-hero__grid, .section-intro, .product-intro, .research-strip__grid, .home-cta__grid { grid-template-columns: 1fr; }
+    .home-hero__grid, .product-intro, .research-strip__grid, .home-cta__grid { grid-template-columns: 1fr; }
     .home-hero__visual { min-width: 0; margin: 0 calc(var(--v-gutter) * -1); aspect-ratio: 16 / 9; }
-    .section-intro .v-lead { grid-column: auto; }
     .plan-grid { grid-template-columns: 1fr; }
     .home-capabilities article { grid-template-columns: 5rem 1fr; }
     .home-capabilities article p { grid-column: 2; }

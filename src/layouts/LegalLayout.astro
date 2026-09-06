@@ -8,9 +8,9 @@ export interface Props {
 }
 const { frontmatter } = Astro.props;
 const title = frontmatter.title;
-const description = frontmatter.description ?? 'GreenSquare legal information.';
+const description = frontmatter.description ?? 'Frame legal information.';
 ---
-<BaseLayoutV2 title={`${title} | GreenSquare`} description={description}>
+<BaseLayoutV2 title={`${title} | Frame`} description={description}>
   <section class="v-section">
     <div class="v-container v-container--narrow">
       <div class="v-prose">

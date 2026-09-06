@@ -3,17 +3,12 @@
    reading text, Manrope Semibold for the supplied wordmark, and a restrained
    forest / black / white palette. */
 :root {
-  /* surfaces */
+  /* surfaces: white, and one grey for cards, inputs and rails */
   --v-paper: #ffffff;
   --v-off: #f5f5f5;
-  --v-canvas: #f3f0e7;
-  --v-fill: #efefec;
-  --v-fill-2: #e7e7e2;
-  --v-fill-3: #d8d8d1;
 
   /* identity */
   --v-green: #133f26;
-  --v-green-deep: #0b2313;
   --v-green-bright: #1b5433;
   --v-green-ink: #10110f;
   --v-lime: #dff49f;
@@ -26,39 +21,51 @@
 
   /* type and rules */
   --v-ink: #12140f;
+  /* One reading grey, not two. The guideline's Muted #63645C was carried as a second
+     supporting tint and used interchangeably with this one, which is a vocabulary the
+     reader cannot see. #4f514b is the darker of the pair (8.04:1 on white against
+     5.99:1) so collapsing onto it costs no contrast anywhere it was already used. */
   --v-ink-soft: #4f514b;
-  --v-ink-faint: #686b65;
   --v-cream: #ffffff;
   --v-cream-soft: rgba(255, 255, 255, 0.82);
   --v-cream-faint: rgba(255, 255, 255, 0.62);
   --v-black: var(--v-green-ink);
   --v-white: var(--v-paper);
   --v-line: #dedad2;
-  --v-line-strong: #a7a59d;
   --v-line-green: rgba(255, 255, 255, 0.22);
-  --v-line-green-strong: rgba(255, 255, 255, 0.42);
   --v-signal: var(--v-confirmed);
-  --v-signal-on-green: #dff49f;
   --v-error: var(--v-risk);
   --v-error-on-green: #ffd8d1;
 
   /* typography */
-  --vf-display: 'Space Grotesk', Arial, sans-serif;
-  --vf-body: 'IBM Plex Sans', Arial, sans-serif;
-  --vf-brand: 'Manrope', Arial, sans-serif;
+  /* Three faces, and each has one job. Guideline V5.1: Space Grotesk Semibold carries
+     H1, H2 and large display figures; IBM Plex Sans carries everything functional,
+     including navigation, tables, captions and controls; Manrope appears only in the
+     logo lockup. IBM Plex Mono is not in the design language and has been removed.
+     It was styling 18 labels at weight 700 against a face loaded only at 400 and 500,
+     so the browser was synthesising the bold. */
+  --vf-display: 'Space Grotesk', 'Space Grotesk Fallback', Arial, sans-serif;
+  --vf-body: 'IBM Plex Sans', 'IBM Plex Sans Fallback', Arial, sans-serif;
+  --vf-brand: 'Manrope', 'Manrope Fallback', Arial, sans-serif;
   --v-font-display: var(--vf-display);
-  --v-font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Consolas, monospace;
 
-  /* larger reading text, quieter headings */
-  --vs-display: clamp(2.65rem, 4.5vw, 4.5rem);
+  /* larger reading text, quieter headings.
+     The display cap is 4rem, which is 64px, matching what Anthropic and OpenAI both
+     render for a page title. Guideline V5.1 says 48 to 56px; that is below every
+     comparator and the larger size is a recorded deviation, not drift.
+     h3 is the guideline's Subheading tier: IBM Plex Sans Semibold, 21 to 24px. */
+  --vs-display: clamp(2.65rem, 4.5vw, 4rem);
   --vs-h1: clamp(2.15rem, 3.5vw, 3.35rem);
   --vs-h2: clamp(1.65rem, 2.5vw, 2.45rem);
-  --vs-h3: 1.25rem;
+  --vs-h3: 1.3125rem;
   --vs-h4: 1.0625rem;
   --vs-lead: clamp(1.18rem, 1.55vw, 1.4rem);
   --vs-body: clamp(1rem, 0.96rem + 0.18vw, 1.075rem);
   --vs-small: clamp(0.96rem, 0.93rem + 0.1vw, 1rem);
-  --vs-label: 0.82rem;
+  /* 15px. Was 0.82rem, or 11.5px, which is smaller than every label on the comparator
+     sites and was the loudest signal that this page did not belong beside them.
+     Guideline V5.1 specifies 14 to 17px for labels. */
+  --vs-label: 0.9375rem;
 
   /* layout */
   --v-max: 1400px;

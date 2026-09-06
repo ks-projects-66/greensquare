@@ -16,16 +16,14 @@ const principles = [
   current="about"
 >
   <div>
-    <section class="v-section v-cream about-hero">
+    <section class="about-hero v-hero v-hero--editorial">
       <div class="v-container">
-        <p class="v-eyebrow">About GreenSquare AI</p>
         <h1>Build the judgement layer between intelligence and action.</h1>
       </div>
     </section>
 
-    <section class="v-section v-white">
+    <section class="v-section">
       <div class="v-container premise-grid">
-        <p class="v-eyebrow">Our premise</p>
         <div>
           <h2>AI can generate more options, evidence and analysis than ever. That does not make the final judgement automatic.</h2>
           <p>GreenSquare AI exists to make consequential decisions more structured, interrogable and accountable.</p>
@@ -33,9 +31,9 @@ const principles = [
       </div>
     </section>
 
-    <section class="v-section v-black">
+    <section class="v-section">
       <div class="v-container">
-        <p class="v-eyebrow">Principles</p>
+        <h2>These four commitments do not change as the underlying model does.</h2>
         <div class="principles">
           {principles.map(([title, copy], index) => (
             <article><span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{copy}</p></article>
@@ -47,18 +45,17 @@ const principles = [
     <section class="v-section v-green">
       <div class="v-container focus-grid">
         <div>
-          <p class="v-eyebrow">Current focus</p>
-          <h2>Make GreenSquare Free genuinely useful. Earn the right to build GreenSquare Pro.</h2>
+          <h2>Make Frame Free genuinely useful. Earn the right to build Frame Pro.</h2>
         </div>
         <p>We are starting with an adaptive system for individual decisions, then learning what paid professional use should require before we define it.</p>
       </div>
     </section>
 
-    <section class="v-section v-cream">
+    <section class="v-section v-green">
       <div class="v-container closing">
         <h2>Bring a real decision.</h2>
         <div class="v-actions">
-          <a class="v-btn v-btn-primary" href={withBase('/free/')}>Try GreenSquare Free</a>
+          <a class="v-btn v-btn--green" href={withBase('/free/')}>Try Frame Free</a>
           <a class="v-link" href="mailto:hello@greensquare.ai">Contact GreenSquare AI</a>
         </div>
       </div>
@@ -67,20 +64,20 @@ const principles = [
 </BaseLayoutV2>
 
 <style>
-  .about-hero { padding-top:clamp(5rem,10vw,9rem); }
   .about-hero h1 { max-width:16ch; }
-  .premise-grid, .focus-grid { display:grid; grid-template-columns:.45fr 1.55fr; gap:clamp(3rem,8vw,8rem); align-items:start; }
+  .focus-grid { display:grid; grid-template-columns:.45fr 1.55fr; gap:clamp(3rem,8vw,8rem); align-items:start; }
+  .premise-grid { max-width:56rem; }
   .premise-grid h2 { max-width:24ch; }
   .premise-grid div > p { max-width:43rem; color:var(--v-ink-soft); font-size:1.1rem; }
-  .principles { display:grid; grid-template-columns:repeat(2,1fr); margin-top:3rem; border-top:1px solid rgba(255,255,255,.25); border-left:1px solid rgba(255,255,255,.25); }
-  .principles article { min-height:17rem; padding:1.5rem; border-right:1px solid rgba(255,255,255,.25); border-bottom:1px solid rgba(255,255,255,.25); }
-  .principles span { color:var(--v-lime); font:700 .72rem/1 var(--v-font-mono); }
+  .principles { display:grid; grid-template-columns:repeat(2,1fr); margin-top:var(--v-5); border-top:1px solid var(--v-line); border-left:1px solid var(--v-line); }
+  .principles article { min-height:17rem; padding:1.5rem; border-right:1px solid var(--v-line); border-bottom:1px solid var(--v-line); }
+  .principles span { color:var(--v-green); font:600 var(--vs-label)/1 var(--vf-body); font-variant-numeric:tabular-nums; }
   .principles h3 { margin-top:4rem; }
-  .principles p { color:var(--v-cream-soft); max-width:28rem; }
+  .principles p { color:var(--v-ink-soft); max-width:28rem; }
   .focus-grid > p { font-size:1.15rem; }
   .closing { display:flex; align-items:end; justify-content:space-between; gap:3rem; }
   @media (max-width:760px) {
-    .premise-grid, .focus-grid { grid-template-columns:1fr; }
+    .focus-grid { grid-template-columns:1fr; }
     .principles { grid-template-columns:1fr; }
     .principles article { min-height:auto; }
     .principles h3 { margin-top:2.5rem; }

@@ -1,14 +1,14 @@
 ---
 layout: ../../layouts/LegalLayout.astro
 title: Cookie notice
-description: How GreenSquare uses cookies and similar technologies.
+description: How Frame uses cookies and similar technologies.
 ---
 
 # Cookie notice
 
 Last updated: 17 August 2026
 
-This notice explains how www.greensquare.ai, run by GreenSquare (the trading name of the operator of this site), uses cookies and similar technologies. Read it alongside our privacy policy.
+This notice explains how www.greensquare.ai, run by GreenSquare AI (the trading name of the operator of this site), uses cookies and similar technologies. Read it alongside our privacy policy.
 
 ## What cookies are
 

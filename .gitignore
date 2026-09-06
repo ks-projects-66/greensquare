@@ -14,7 +14,12 @@ Thumbs.db
 # Local QA artefacts
 /_qa/
 /screenshots/
-/.impeccable/review/
+/.impeccable/
+/.design-sync/
+/.playwright-mcp/
+# Screenshots and the report written by qa/run-launch-qa.mjs. CI uploads these as a
+# build artefact; running the same gate locally must not leave binaries in a public repo.
+/qa/launch/
 
 # Internal / commercial docs — keep OUT of this public repo.
 # Canonical home is the private repo ks-projects-66/greensquare-ops (+ OneDrive copies).
@@ -35,3 +40,4 @@ Thumbs.db
 /.design-sync/.cache/
 /.design-sync/learnings/
 /.design-sync/node_modules
+.env*

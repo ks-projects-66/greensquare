@@ -4,7 +4,7 @@ import EmailCaptureForm from '../components/EmailCaptureForm';
 import { withBase } from '../lib/paths';
 
 const stages = [
-  ['01', 'Frame', 'Turn the situation into a decision you can actually work on.'],
+  ['01', 'Clarify', 'Turn the situation into a decision you can actually work on.'],
   ['02', 'Inspect', 'Surface the evidence, assumptions and constraints already in play.'],
   ['03', 'Test', 'Interrogate weak logic and ask the next useful question.'],
   ['04', 'Compare', 'Make the real trade-offs between credible options visible.'],
@@ -14,39 +14,26 @@ const stages = [
 ---
 
 <BaseLayoutV2
-  title="GreenSquare Free | GreenSquare AI"
+  title="Frame Free | GreenSquare AI"
   description="A free, adaptive decision system that helps you frame, challenge and act on consequential decisions."
 >
   <div>
-    <section class="v-section v-cream hero">
-      <div class="v-container hero-grid">
-        <div>
-          <p class="v-eyebrow">GreenSquare Free</p>
-          <h1>Give it the problem.<br />It works out what to ask next.</h1>
-          <p class="v-lede">A guided decision system that adapts to your situation, challenges the logic and produces a portable Decision Brief.</p>
-          <div class="v-actions">
-            <a class="v-btn v-btn-primary" href="#get-free">Get GreenSquare Free</a>
-            <a class="v-link" href={withBase('/product/#demo')}>See how it works</a>
-          </div>
+    <section class="hero v-hero v-hero--marketing">
+      <div class="v-container">
+        <h1>Give it the problem.<br />It works out what to ask next.</h1>
+        <p class="v-lead">A guided decision system that adapts to your situation, challenges the logic and produces a portable Decision Brief.</p>
+        <div class="v-actions">
+          <a class="v-btn v-btn--green" href="#get-free">Get Frame Free</a>
+          <a class="v-link" href={withBase('/product/#demo')}>See how it works</a>
         </div>
-
-        <aside class="brief-card" aria-label="Illustrative GreenSquare Decision Brief">
-          <div class="brief-top"><span>DECISION BRIEF</span><span>01 / 06</span></div>
-          <p class="v-small">DECISION</p>
-          <h2>Where should we focus the next quarter?</h2>
-          <div class="brief-row"><span>Current confidence</span><strong>MEDIUM</strong></div>
-          <div class="brief-row"><span>Next question</span><strong>Demand evidence</strong></div>
-          <div class="brief-footer">Portable file · Your evidence · Your judgement</div>
-        </aside>
       </div>
     </section>
 
-    <section class="v-section v-white">
+    <section class="v-section">
       <div class="v-container">
         <div class="section-head">
-          <p class="v-eyebrow">An adaptive interview</p>
           <h2>It changes course when the decision changes.</h2>
-          <p>GreenSquare does not push every problem through a fixed questionnaire. Each answer updates the state of the decision and determines what needs attention next.</p>
+          <p>Frame does not push every problem through a fixed questionnaire. Each answer updates the state of the decision and determines what needs attention next.</p>
         </div>
         <div class="stages">
           {stages.map(([number, name, copy]) => (
@@ -60,11 +47,10 @@ const stages = [
       </div>
     </section>
 
-    <section class="v-section v-black">
+    <section class="v-section">
       <div class="v-container boundary-grid">
         <div>
-          <p class="v-eyebrow">The operating boundary</p>
-          <h2>GreenSquare strengthens judgement. It does not replace it.</h2>
+          <h2>You bring the evidence and the accountability. Frame brings the discipline to work through them.</h2>
         </div>
         <div class="boundary-list">
           <p><strong>Your environment.</strong> Use it with a capable AI model you already trust.</p>
@@ -77,19 +63,17 @@ const stages = [
     <section class="v-section v-green" id="get-free">
       <div class="v-container signup-grid">
         <div>
-          <p class="v-eyebrow">Free during beta</p>
           <h2>Start with a real decision.</h2>
-          <p>Join the beta list and we’ll email you GreenSquare Free.</p>
+          <p>Join the beta list and we’ll email you Frame Free.</p>
         </div>
         <EmailCaptureForm client:load />
       </div>
     </section>
 
-    <section class="v-section v-cream">
+    <section class="v-section">
       <div class="v-container faq-grid">
         <div>
-          <p class="v-eyebrow">Questions</p>
-          <h2>What GreenSquare Free is, and is not.</h2>
+          <h2>What Frame Free is, and is not.</h2>
         </div>
         <div class="faq-list">
           <details open>
@@ -102,10 +86,10 @@ const stages = [
           </details>
           <details>
             <summary>Which AI model does it use?</summary>
-            <p>GreenSquare Free is designed to work with a capable model in the environment you choose. It is not tied to one provider.</p>
+            <p>Frame Free is designed to work with a capable model in the environment you choose. It is not tied to one provider.</p>
           </details>
           <details>
-            <summary>What is GreenSquare Pro?</summary>
+            <summary>What is Frame Pro?</summary>
             <p>The paid plan is in development. We will announce its scope only when the product boundary is ready.</p>
           </details>
         </div>
@@ -115,34 +99,24 @@ const stages = [
 </BaseLayoutV2>
 
 <style>
-  .hero { padding-top: clamp(5rem, 10vw, 9rem); }
-  .hero-grid, .boundary-grid, .signup-grid, .faq-grid { display:grid; grid-template-columns:minmax(0,1.12fr) minmax(18rem,.88fr); gap:clamp(2.5rem,7vw,7rem); align-items:center; }
-  h1 { max-width:12ch; }
-  .v-lede { max-width:38rem; }
-  .brief-card { background:var(--v-black); color:var(--v-cream); padding:clamp(1.5rem,4vw,2.5rem); transform:rotate(1.25deg); box-shadow:1.1rem 1.1rem 0 var(--v-green); }
-  .brief-top, .brief-row { display:flex; justify-content:space-between; gap:1rem; }
-  .brief-top { border-bottom:1px solid rgba(255,255,255,.28); padding-bottom:1rem; margin-bottom:2.5rem; font:700 .72rem/1 var(--v-font-mono); letter-spacing:.08em; }
-  .brief-card .v-small { color:var(--v-lime); }
-  .brief-card h2 { font-size:clamp(1.7rem,3vw,2.6rem); margin-bottom:3rem; }
-  .brief-row { border-top:1px solid rgba(255,255,255,.2); padding:1rem 0; font-size:.9rem; }
-  .brief-row strong { color:var(--v-lime); font-family:var(--v-font-mono); font-size:.72rem; }
-  .brief-footer { margin-top:2rem; color:var(--v-cream-soft); font-size:.76rem; }
+  .boundary-grid, .signup-grid, .faq-grid { display:grid; grid-template-columns:minmax(0,1.12fr) minmax(18rem,.88fr); gap:clamp(2.5rem,7vw,7rem); align-items:center; }
+  h1 { max-width:20ch; }
+  .v-lead { max-width:38rem; }
   .section-head { max-width:48rem; margin-bottom:3rem; }
   .stages { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--v-line); border-left:1px solid var(--v-line); }
   .stages article { min-height:15rem; padding:1.5rem; border-right:1px solid var(--v-line); border-bottom:1px solid var(--v-line); }
-  .stages span { color:var(--v-green-deep); font:700 .75rem/1 var(--v-font-mono); }
+  .stages span { color:var(--v-green); font:600 var(--vs-label)/1 var(--vf-body); font-variant-numeric:tabular-nums; }
   .stages h3 { margin-top:3.5rem; }
   .stages p { color:var(--v-ink-soft); font-size:.95rem; }
-  .boundary-list p { border-top:1px solid rgba(255,255,255,.25); padding:1.2rem 0; margin:0; color:var(--v-cream-soft); }
-  .boundary-list strong { color:var(--v-cream); }
+  .boundary-list p { border-top:1px solid var(--v-line); padding:1.2rem 0; margin:0; color:var(--v-ink-soft); }
+  .boundary-list strong { color:var(--v-ink); }
   .signup-grid form { max-width:34rem; }
   .faq-grid { align-items:start; }
   .faq-list details { border-top:1px solid var(--v-line); padding:1.25rem 0; }
   .faq-list summary { cursor:pointer; font-weight:700; }
   .faq-list p { color:var(--v-ink-soft); margin:1rem 0 0; }
   @media (max-width: 760px) {
-    .hero-grid, .boundary-grid, .signup-grid, .faq-grid { grid-template-columns:1fr; }
-    .brief-card { transform:none; box-shadow:.65rem .65rem 0 var(--v-green); }
+    .boundary-grid, .signup-grid, .faq-grid { grid-template-columns:1fr; }
     .stages { grid-template-columns:1fr; }
     .stages article { min-height:auto; }
     .stages h3 { margin-top:2rem; }

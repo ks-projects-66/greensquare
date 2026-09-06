@@ -13,6 +13,21 @@ on:
       - 'package-lock.json'
       - 'lighthouserc.cjs'
       - '.github/workflows/launch-preview-qa.yml'
+  # A merge can combine two individually green branches into a broken main, and
+  # nothing re-checked main after the merge commit. The path list is repeated
+  # rather than shared because the Actions parser does not accept YAML anchors.
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'scripts/**'
+      - 'qa/**'
+      - 'astro.config.*'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'lighthouserc.cjs'
+      - '.github/workflows/launch-preview-qa.yml'
   workflow_dispatch:
 
 permissions:
@@ -39,7 +54,6 @@ jobs:
 
       - name: Install browser QA tools
         run: |
-          npm install --no-save playwright@1.55.0 @axe-core/playwright@4.10.2 @lhci/cli@0.15.1 @astrojs/check@0.9.6 typescript@5.9.3
           npx playwright install --with-deps chromium
           echo "CHROME_PATH=$(find "$HOME/.cache/ms-playwright" -type f -path '*/chrome-linux/chrome' | head -1)" >> "$GITHUB_ENV"
 

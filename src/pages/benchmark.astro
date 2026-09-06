@@ -1,6 +1,7 @@
 ---
 import BaseLayoutV2 from '../layouts/BaseLayoutV2.astro';
 import { withBase } from '../lib/paths';
+import SectionNav from '../components/SectionNav.astro';
 import {
   armLabels, checks, composite, dates, deviations, fmt, grid, limitations, prereg,
 } from '../lib/benchmark';
@@ -20,24 +21,32 @@ const loaded = arms[2];
 
 <BaseLayoutV2
   title="Benchmark results | GreenSquare AI"
-  description={`The complete public record of GreenSquare's ${g.runs_total}-run preregistered benchmark, including raw counts, limitations and protocol deviations.`}
+  description={`The complete public record of our ${g.runs_total}-run preregistered benchmark, including raw counts, limitations and protocol deviations.`}
   current="research"
 >
   <div>
-    <section class="v-section v-black hero">
+    <section class="hero v-hero v-hero--editorial">
       <div class="v-container">
-        <p class="v-eyebrow">Benchmark record · Current as at {d.currentAsAt}</p>
         <h1>The loaded method changed the process. It did not beat an informed baseline on judgement.</h1>
-        <p class="v-lede">A {g.runs_total}-run preregistered study across two models, three fictional cases and three conditions. Raw counts and uncomfortable limitations are part of the result.</p>
+        <p class="v-eyebrow v-dateline">Benchmark record, current as at {d.currentAsAt}</p>
+        <p class="v-lead">A {g.runs_total}-run preregistered study across two models, three fictional cases and three conditions. Raw counts and uncomfortable limitations are part of the result.</p>
       </div>
     </section>
 
-    <nav class="record-nav" aria-label="Benchmark sections"><div class="v-container">
-      <a href="#reading">Reading</a><a href="#results">Results</a><a href="#design">Design</a><a href="#integrity">Integrity</a><a href="#limits">Limits</a><a href="#sources">Sources</a>
-    </div></nav>
+    <SectionNav
+      label="Benchmark sections"
+      items={[
+        { id: 'reading', label: 'Reading' },
+        { id: 'results', label: 'Results' },
+        { id: 'design', label: 'Design' },
+        { id: 'integrity', label: 'Integrity' },
+        { id: 'limits', label: 'Limits' },
+        { id: 'sources', label: 'Sources' },
+      ]}
+    />
 
-    <section class="v-section v-cream" id="reading"><div class="v-container reading-grid">
-      <div><p class="v-eyebrow">The honest reading</p><h2>Process separation was clear. Judgement separation was not.</h2></div>
+    <section class="v-section" id="reading"><div class="v-container reading-grid">
+      <div><h2>Process separation was clear. Judgement stayed too close to call.</h2></div>
       <div class="reading-points">
         <p><strong>Process.</strong> The loaded condition asked before answering, compared options and tagged evidence on every run.</p>
         <p><strong>Judgement.</strong> The all-facts baseline matched or exceeded the loaded condition on all three judgement checks.</p>
@@ -45,8 +54,8 @@ const loaded = arms[2];
       </div>
     </div></section>
 
-    <section class="v-section v-green" id="results"><div class="v-container">
-      <div class="results-head"><p class="v-eyebrow">Raw results</p><h2>Eight preregistered checks. Counts out of {g.n_per_arm} per condition.</h2></div>
+    <section class="v-section" id="results"><div class="v-container">
+      <div class="results-head"><h2>Eight preregistered checks, scored out of {g.n_per_arm} per condition.</h2></div>
       <div class="table-wrap" tabindex="0" aria-label="Scrollable benchmark results">
         <table>
           <caption>Benchmark checks by condition</caption>
@@ -62,35 +71,35 @@ const loaded = arms[2];
       <p class="table-note">Some cells are wholly or partly definitional because a single-turn prompt cannot ask questions or obtain facts it was not given. The methodology and limitations record those cases.</p>
     </div></section>
 
-    <section class="v-section v-white"><div class="v-container composite-grid">
+    <section class="v-section"><div class="v-container composite-grid">
       <div><p class="v-eyebrow">Derived process figure</p><h2>Produced the full brief structure</h2></div>
       <div class="composite-score"><strong>{fmt(comp.armC).text}</strong><span>{loaded.label}</span></div>
       <p class="composite-note">This is the lowest of the five process check counts. It is not an independent ninth result and was not the preregistered headline.</p>
     </div></section>
 
-    <section class="v-section v-cream" id="design"><div class="v-container design-grid">
-      <div><p class="v-eyebrow">Study design</p><h2>Information access was controlled across three conditions.</h2></div>
+    <section class="v-section" id="design"><div class="v-container design-grid">
+      <div><h2>Information access was controlled across three conditions.</h2></div>
       <ol>
         {arms.map((arm, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{arm.label}</h3><p>{arm.note}</p></div></li>)}
       </ol>
-      <aside class="historical"><strong>Historical naming note.</strong> The frozen study artefact used earlier internal product names. The public record now calls the arm the GreenSquare-loaded condition. This study is not a test of GreenSquare Free or GreenSquare Pro.</aside>
+      <aside class="historical"><strong>Historical naming note.</strong> The frozen study artefact used earlier internal product names. The public record now calls the arm the loaded condition. This study is not a test of Frame Free or Frame Pro.</aside>
       <a class="v-link" href={withBase('/methodology/')}>Read the full methodology</a>
     </div></section>
 
-    <section class="v-section v-black" id="integrity"><div class="v-container">
-      <div class="integrity-head"><p class="v-eyebrow">Protocol integrity</p><h2>The record includes {integrityIssues.length} deviations.</h2><p>They are not footnotes to be hidden. They change how confidently the result should be read.</p></div>
+    <section class="v-section" id="integrity"><div class="v-container">
+      <div class="integrity-head"><h2>The record includes {integrityIssues.length} deviations.</h2><p>They are not footnotes to be hidden. They change how confidently the result should be read.</p></div>
       <ol class="issues">
         {integrityIssues.map((issue) => <li><span>{String(issue.n).padStart(2, '0')}</span><details><summary>{issue.title}</summary><p>{issue.detail}</p></details></li>)}
       </ol>
     </div></section>
 
-    <section class="v-section v-cream" id="limits"><div class="v-container limits-grid">
-      <div><p class="v-eyebrow">Limitations</p><h2>What this benchmark cannot establish.</h2></div>
+    <section class="v-section" id="limits"><div class="v-container limits-grid">
+      <div><h2>What this benchmark cannot establish.</h2></div>
       <ol>{studyLimits.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>)}</ol>
     </div></section>
 
-    <section class="v-section v-white" id="sources"><div class="v-container sources-grid">
-      <div><p class="v-eyebrow">Source record</p><h2>Inspect what is public, and what remains withheld.</h2></div>
+    <section class="v-section" id="sources"><div class="v-container sources-grid">
+      <div><h2>Inspect what is public, and what remains withheld.</h2></div>
       <dl>
         <div><dt>Scored runs</dt><dd>{g.runs_total}</dd></div>
         <div><dt>Preregistration commit</dt><dd><a href={pre.commitUrl}>{pre.short}</a></dd></div>
@@ -98,53 +107,59 @@ const loaded = arms[2];
         <div><dt>Transcripts</dt><dd>Not published</dd></div>
         <div><dt>Sealed answers</dt><dd>Hash verified, contents not published</dd></div>
       </dl>
-      <div class="source-actions"><a class="v-btn v-btn-primary" href="https://github.com/greensquare-ai/website/tree/main/evidence/preregistration">Frozen source files</a><a class="v-link" href={withBase('/research/')}>Research overview</a></div>
+      <div class="source-actions"><a class="v-btn v-btn--green" href="https://github.com/greensquare-ai/website/tree/main/evidence/preregistration">Frozen source files</a><a class="v-link" href={withBase('/research/')}>Research overview</a></div>
     </div></section>
   </div>
 </BaseLayoutV2>
 
 <style>
-  .hero { padding-top:clamp(5rem,10vw,9rem); }
   .hero h1 { max-width:18ch; }
-  .hero .v-lede { color:var(--v-cream-soft); max-width:52rem; }
-  .record-nav { position:sticky; top:0; z-index:20; background:var(--v-cream); border-bottom:1px solid var(--v-line); }
-  .record-nav .v-container { min-height:3.5rem; display:flex; align-items:center; gap:clamp(1rem,4vw,3rem); overflow-x:auto; }
-  .record-nav a { color:var(--v-black); text-decoration:none; font-size:.84rem; font-weight:700; white-space:nowrap; }
+  /* The dateline sits below the h1, in the OpenAI idiom, rather than as a kicker above
+     it. That puts a second element between the h1 and the lead, so the global
+     `h1 + .v-lead` spacing rule no longer applies here; both gaps are set locally. */
+  /* `.v-black .v-eyebrow` (global-v2.css) sets every label in a dark section to lime,
+     which is right for a section label but too loud for a quiet provenance line. Extra
+     class beats it on specificity rather than fighting the cascade with !important. */
+  .hero .v-eyebrow.v-dateline { margin-top: var(--v-4); color: var(--v-ink-soft); }
+  .v-dateline + .v-lead { margin-top: var(--v-5); }
+  .hero .v-lead { max-width:52rem; }
   .reading-grid, .design-grid, .limits-grid, .sources-grid { display:grid; grid-template-columns:minmax(0,.9fr) minmax(20rem,1.1fr); gap:clamp(3rem,8vw,8rem); align-items:start; }
   .reading-points p { padding:1.2rem 0; margin:0; border-top:1px solid var(--v-line); }
   .results-head { max-width:52rem; margin-bottom:3rem; }
   .table-wrap { overflow-x:auto; outline-offset:.3rem; }
-  table { width:100%; min-width:48rem; border-collapse:collapse; background:var(--v-cream); color:var(--v-black); }
+  table { width:100%; min-width:48rem; border-collapse:collapse; background:var(--v-paper); color:var(--v-ink); }
   caption { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
-  th, td { padding:1rem; border:1px solid rgba(0,0,0,.22); text-align:left; }
-  thead th { background:var(--v-black); color:var(--v-cream); font:700 .72rem/1.2 var(--v-font-mono); text-transform:uppercase; }
+  th, td { padding:1rem; border:1px solid var(--v-line); text-align:left; }
+  thead th { background:var(--v-off); color:var(--v-ink); font:600 .875rem/1.3 var(--vf-body); }
   tbody th { font-size:.9rem; }
-  td { font:700 .82rem/1 var(--v-font-mono); white-space:nowrap; }
-  td.loaded { background:rgba(18,255,117,.13); }
-  tr.group th { background:#dedbd0; font:700 .67rem/1 var(--v-font-mono); letter-spacing:.08em; text-transform:uppercase; }
+  td { font:600 var(--vs-label)/1.3 var(--vf-body); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  /* Derived from Forest, not a new hue. The previous rgba(18,255,117,.13) was a bright
+     mint that appears nowhere in the palette. */
+  td.loaded { background:color-mix(in srgb, var(--v-green) 9%, var(--v-paper)); }
+  tr.group th { background:var(--v-line); font:600 .8125rem/1.3 var(--vf-body); }
   .table-note { max-width:55rem; font-size:.85rem; }
   .composite-grid { display:grid; grid-template-columns:1fr auto; gap:2rem 5rem; align-items:end; }
   .composite-score { display:flex; flex-direction:column; align-items:flex-end; }
-  .composite-score strong { font:700 clamp(3.2rem,9vw,7rem)/.8 var(--v-font-display); }
-  .composite-score span { margin-top:1rem; font:700 .7rem/1 var(--v-font-mono); color:var(--v-green-deep); }
+  .composite-score strong { font:600 clamp(3.2rem,9vw,7rem)/.8 var(--v-font-display); font-variant-numeric:tabular-nums; }
+  .composite-score span { margin-top:1rem; font:500 var(--vs-label)/1.3 var(--vf-body); color:var(--v-green); }
   .composite-note { grid-column:1/-1; border-top:1px solid var(--v-line); padding-top:1rem; font-size:.85rem; }
   .design-grid ol { list-style:none; margin:0; padding:0; }
   .design-grid li { display:grid; grid-template-columns:3rem 1fr; gap:1rem; padding:1.2rem 0; border-top:1px solid var(--v-line); }
-  .design-grid li > span { font:700 .7rem/1 var(--v-font-mono); color:var(--v-green-deep); padding-top:.3rem; }
+  .design-grid li > span { font:600 var(--vs-label)/1.3 var(--vf-body); font-variant-numeric:tabular-nums; color:var(--v-green); padding-top:.3rem; }
   .design-grid h3, .design-grid p { margin:0; }
   .design-grid p { margin-top:.4rem; color:var(--v-ink-soft); }
   .historical { grid-column:1/-1; padding:1.25rem; border-left:.4rem solid var(--v-green); background:var(--v-white); font-size:.88rem; }
   .design-grid > .v-link { grid-column:2; }
   .integrity-head { max-width:52rem; margin-bottom:3rem; }
-  .integrity-head > p:last-child { color:var(--v-cream-soft); }
-  .issues { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(2,1fr); border-top:1px solid rgba(255,255,255,.22); border-left:1px solid rgba(255,255,255,.22); }
-  .issues li { display:grid; grid-template-columns:2.5rem 1fr; gap:1rem; padding:1.25rem; border-right:1px solid rgba(255,255,255,.22); border-bottom:1px solid rgba(255,255,255,.22); }
-  .issues li > span { color:var(--v-lime); font:700 .7rem/1 var(--v-font-mono); padding-top:.25rem; }
+  .integrity-head > p:last-child { color:var(--v-ink-soft); }
+  .issues { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(2,1fr); border-top:1px solid var(--v-line); border-left:1px solid var(--v-line); }
+  .issues li { display:grid; grid-template-columns:2.5rem 1fr; gap:1rem; padding:1.25rem; border-right:1px solid var(--v-line); border-bottom:1px solid var(--v-line); }
+  .issues li > span { color:var(--v-green); font:600 var(--vs-label)/1.3 var(--vf-body); font-variant-numeric:tabular-nums; padding-top:.25rem; }
   .issues summary { cursor:pointer; font-weight:700; }
-  .issues p { color:var(--v-cream-soft); font-size:.88rem; }
+  .issues p { color:var(--v-ink-soft); font-size:.88rem; }
   .limits-grid ol { list-style:none; padding:0; margin:0; }
   .limits-grid li { display:grid; grid-template-columns:2.5rem 1fr; gap:1rem; border-top:1px solid var(--v-line); padding:1rem 0; }
-  .limits-grid li span { font:700 .7rem/1 var(--v-font-mono); color:var(--v-green-deep); padding-top:.45rem; }
+  .limits-grid li span { font:600 var(--vs-label)/1.3 var(--vf-body); font-variant-numeric:tabular-nums; color:var(--v-green); padding-top:.45rem; }
   .limits-grid li p { margin:0; }
   .sources-grid dl { margin:0; }
   .sources-grid dl div { display:grid; grid-template-columns:10rem 1fr; gap:1rem; padding:1rem 0; border-top:1px solid var(--v-line); }

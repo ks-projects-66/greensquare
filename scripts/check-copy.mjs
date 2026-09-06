@@ -56,17 +56,21 @@ function visibleText(html) {
 const RULES = [
   {
     name: 'retired product names',
-    decision: 'One product and two-plan architecture locked on 2026-09-01',
+    decision: 'Frame is the product, Frame Free and Frame Pro the plans (2026-09-05)',
     test: (text) => [
       ...text.matchAll(/\bCompass\b/g),
       ...text.matchAll(/\bLens(?:\s4\.0)?\b/g),
       ...text.matchAll(/The Decision(?! Brief)/g),
       ...text.matchAll(/Decision Frame/g),
+      /* GreenSquare is the company, not the product. `GreenSquare AI` is the only
+         permitted form; a bare `GreenSquare` is the retired product name. The
+         lookahead is what separates them, so do not simplify it away. */
+      ...text.matchAll(/\bGreenSquare\b(?! AI)/g),
     ].map((m) => m[0]),
   },
   {
     name: 'unannounced product names',
-    decision: 'Only GreenSquare Free and GreenSquare Pro are announced',
+    decision: 'Only Frame Free and Frame Pro are announced',
     test: (text) =>
       [...text.matchAll(/\b(Scout|Atlas|Spark|Forge|Realm)\b/g)].map((m) => m[0]),
   },
@@ -81,7 +85,7 @@ const RULES = [
     decision: 'No price is surfaced at launch',
     test: (text) => [...text.matchAll(/(?:A?\$|AUD\s?)\d/g)].map((m) => m[0]),
     // The demonstration transcript is a fictional case containing fictional money.
-    // It is quoted evidence, not a GreenSquare price.
+    // It is quoted evidence, not a Frame price.
     exempt: (route) => route.startsWith('benchmark'),
   },
   {
@@ -138,7 +142,7 @@ try {
       count: 1,
     });
   }
-  if (!/not a test of GreenSquare Free or GreenSquare Pro/.test(text)) {
+  if (!/not a test of Frame Free or Frame Pro/.test(text)) {
     failures.push({
       route: 'benchmark',
       rule: 'the historical naming boundary is missing',

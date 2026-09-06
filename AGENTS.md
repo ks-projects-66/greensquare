@@ -20,12 +20,14 @@ This repository contains the production GreenSquare AI website and intentionally
 ## Product naming
 
 - Company: **GreenSquare AI**.
-- Product: **GreenSquare**.
-- Current beta plan: **GreenSquare Free**.
-- Future paid plan: **GreenSquare Pro**, described only as “in development”.
+- Product: **Frame**.
+- Current beta plan: **Frame Free**.
+- Future paid plan: **Frame Pro**, described only as “in development”.
 - Output: **Decision Brief**.
+- A bare **GreenSquare** is a retired product name and is guarded. `GreenSquare AI` is the only permitted form of the word; the guard is a negative lookahead on ` AI`, so do not simplify it.
+- **Frame** names the product and nothing else. It is not a method step: the first step is **Clarify**.
 - Earlier customer-facing product names are retired. They may appear only inside frozen evidence or a compact historical naming disclosure on the research record.
-- Research describes the tested third arm as the **GreenSquare-loaded condition**. It must also state that the study is not a test of GreenSquare Free or GreenSquare Pro.
+- Research describes the tested third arm as the **loaded condition**, which names what was supplied rather than which product supplied it. The benchmark predates Frame, so no arm may be labelled with a current product name. It must also state that the study is not a test of Frame Free or Frame Pro.
 
 ## Before editing `/benchmark`
 

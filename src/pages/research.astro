@@ -1,77 +1,72 @@
 ---
 import BaseLayoutV2 from '../layouts/BaseLayoutV2.astro';
 import { withBase } from '../lib/paths';
+import SectionNav from '../components/SectionNav.astro';
 ---
 
 <BaseLayoutV2
   title="Research | GreenSquare AI"
-  description="The evidence, limits and study record behind GreenSquare's approach to professional judgement."
+  description="The evidence, limits and study record behind our approach to professional judgement."
   current="research"
 >
   <div>
-    <section class="v-section v-black research-hero">
+    <section class="research-hero v-hero v-hero--editorial">
       <div class="v-container">
-        <p class="v-eyebrow">Research</p>
         <h1>Test the method.<br />Publish the boundary.</h1>
-        <p class="v-lede">We study whether structured decision support improves professional judgement, and state plainly what the evidence cannot yet establish.</p>
+        <p class="v-lead">We study whether structured decision support improves professional judgement, and state plainly what the evidence cannot yet establish.</p>
       </div>
     </section>
 
-    <nav class="research-nav" aria-label="On this page">
-      <div class="v-container">
-        <span>ON THIS PAGE</span>
-        <a href="#finding">Finding</a>
-        <a href="#boundary">Boundary</a>
-        <a href="#record">Study record</a>
-        <a href="#next">Next work</a>
-      </div>
-    </nav>
+    <SectionNav
+      items={[
+        { id: 'finding', label: 'Finding' },
+        { id: 'boundary', label: 'Boundary' },
+        { id: 'record', label: 'Study record' },
+        { id: 'next', label: 'Next work' },
+      ]}
+    />
 
-    <section class="v-section v-cream" id="finding">
+    <section class="v-section" id="finding">
       <div class="v-container finding-grid">
         <div>
-          <p class="v-eyebrow">The first finding</p>
-          <h2>The value came from changing the process, not merely changing the answer.</h2>
+          <h2>The structured process is where the tested change showed up.</h2>
         </div>
         <div class="finding-copy">
-          <p>In our initial preregistered benchmark, the GreenSquare-loaded condition matched or exceeded an informed baseline on the measured judgement outcomes.</p>
+          <p>In our initial preregistered benchmark, the loaded condition matched or exceeded an informed baseline on the measured judgement outcomes.</p>
           <p>That is evidence for a structured method under the tested conditions. It is not proof of universal performance.</p>
           <a class="v-link" href={withBase('/benchmark/')}>Read the full benchmark</a>
         </div>
       </div>
     </section>
 
-    <section class="v-section v-green" id="boundary">
+    <section class="v-section" id="boundary">
       <div class="v-container evidence-boundary">
-        <p class="v-eyebrow">What we can say</p>
         <h2>Under the tested conditions, the structured method improved how the decision was worked.</h2>
         <div class="boundary-grid">
-          <p><strong>Supported:</strong> the GreenSquare-loaded condition matched or exceeded the informed baseline on the measured judgement outcomes.</p>
+          <p><strong>Supported:</strong> the loaded condition matched or exceeded the informed baseline on the measured judgement outcomes.</p>
           <p><strong>Not established:</strong> performance across every decision type, organisation, user population or model environment.</p>
         </div>
       </div>
     </section>
 
-    <section class="v-section v-white" id="record">
+    <section class="v-section" id="record">
       <div class="v-container record-grid">
         <div>
-          <p class="v-eyebrow">Study record</p>
           <h2>Inspect the claim, method and frozen source material.</h2>
         </div>
         <div class="record-links">
-          <a href={withBase('/benchmark/')}><span>Results</span><strong>Benchmark record</strong><b aria-hidden="true">↗</b></a>
-          <a href={withBase('/methodology/')}><span>Design</span><strong>Methodology</strong><b aria-hidden="true">↗</b></a>
-          <a href="https://github.com/greensquare-ai/website/tree/main/evidence/preregistration"><span>Source</span><strong>Frozen preregistration</strong><b aria-hidden="true">↗</b></a>
+          <a href={withBase('/benchmark/')}><span>Results</span><strong>Benchmark record</strong></a>
+          <a href={withBase('/methodology/')}><span>Design</span><strong>Methodology</strong></a>
+          <a href="https://github.com/greensquare-ai/website/tree/main/evidence/preregistration"><span>Source</span><strong>Frozen preregistration</strong></a>
         </div>
-        <p class="historical-note"><strong>Historical naming note.</strong> The published study used earlier internal product names. It is evidence about the tested method and condition, not a test of the current GreenSquare Free plan or the future GreenSquare Pro plan.</p>
+        <p class="historical-note"><strong>Historical naming note.</strong> The published study used earlier internal product names and predates Frame. It is evidence about the tested method and condition, not a test of the current Frame Free plan or the future Frame Pro plan.</p>
       </div>
     </section>
 
-    <section class="v-section v-black" id="next">
+    <section class="v-section" id="next">
       <div class="v-container next-grid">
         <div>
-          <p class="v-eyebrow">Next work</p>
-          <h2>Broader tasks. More users. Stronger external validity.</h2>
+          <h2>Future work needs to widen the test: more decision domains, more users, sharper measurement of the outcome.</h2>
         </div>
         <p>Future studies should test different decision domains, model environments and user populations, with clearer measurement of downstream action and decision quality.</p>
       </div>
@@ -80,27 +75,20 @@ import { withBase } from '../lib/paths';
 </BaseLayoutV2>
 
 <style>
-  .research-hero { padding-top:clamp(5rem,10vw,9rem); }
   .research-hero h1 { max-width:12ch; }
-  .research-hero .v-lede { max-width:48rem; color:var(--v-cream-soft); }
-  .research-nav { position:sticky; top:0; z-index:20; background:var(--v-cream); border-bottom:1px solid var(--v-line); }
-  .research-nav .v-container { min-height:3.5rem; display:flex; align-items:center; gap:clamp(1rem,3vw,2.5rem); overflow-x:auto; }
-  .research-nav span { font:700 .65rem/1 var(--v-font-mono); color:var(--v-ink-soft); letter-spacing:.08em; white-space:nowrap; }
-  .research-nav a { color:var(--v-black); font-size:.84rem; font-weight:700; text-decoration:none; white-space:nowrap; }
+  .research-hero .v-lead { max-width:48rem; }
   .finding-grid, .record-grid, .next-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(18rem,.75fr); gap:clamp(3rem,8vw,8rem); align-items:start; }
   .finding-copy p { font-size:clamp(1.05rem,2vw,1.3rem); }
   .finding-copy .v-link { display:inline-block; margin-top:1rem; }
   .evidence-boundary { max-width:67rem; }
-  .boundary-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; border-top:1px solid rgba(255,255,255,.3); margin-top:3rem; padding-top:1.5rem; }
+  .boundary-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; border-top:1px solid var(--v-line); margin-top:3rem; padding-top:1.5rem; }
   .boundary-grid p { margin:0; }
-  .record-links a { display:grid; grid-template-columns:5rem 1fr auto; gap:1rem; padding:1.4rem 0; color:var(--v-black); text-decoration:none; border-top:1px solid var(--v-line); }
-  .record-links span { color:var(--v-ink-soft); font:700 .68rem/1.4 var(--v-font-mono); text-transform:uppercase; }
-  .record-links b { color:var(--v-green-deep); }
-  .historical-note { grid-column:1/-1; max-width:60rem; margin-top:4rem; padding-top:1.5rem; border-top:1px solid var(--v-line); color:var(--v-ink-soft); font-size:.88rem; }
-  .next-grid > p { color:var(--v-cream-soft); font-size:1.1rem; }
+  .record-links a { display:grid; grid-template-columns:5rem 1fr; gap:1rem; padding:1.4rem 0; color:var(--v-ink); text-decoration:none; border-top:1px solid var(--v-line); }
+  .record-links span { color:var(--v-ink-soft); font:600 var(--vs-label)/1.4 var(--vf-body); }
+    .historical-note { grid-column:1/-1; max-width:60rem; margin-top:4rem; padding-top:1.5rem; border-top:1px solid var(--v-line); color:var(--v-ink-soft); font-size:.88rem; }
+  .next-grid > p { color:var(--v-ink-soft); font-size:1.1rem; }
   @media (max-width:760px) {
-    .research-nav { top:0; }
     .finding-grid, .record-grid, .next-grid, .boundary-grid { grid-template-columns:1fr; }
-    .record-links a { grid-template-columns:4.5rem 1fr auto; }
+    .record-links a { grid-template-columns:4.5rem 1fr; }
   }
 </style>

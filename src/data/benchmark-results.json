@@ -32,7 +32,7 @@
   "arms": [
     { "id": "armA", "label": "Question only", "note": "The frozen prompt only. One turn. If the model asks questions they are not answered." },
     { "id": "armB", "label": "All facts", "note": "The frozen prompt with the full fact sheet appended in the first message. One turn. Equal information to the loaded condition." },
-    { "id": "armC", "label": "GreenSquare loaded", "note": "The frozen method file, then the frozen prompt. The model interrogates; the operator answers only from the fact sheet and replies 'That has not been assessed' to anything off-sheet." }
+    { "id": "armC", "label": "Loaded method", "note": "The frozen method file, then the frozen prompt. The model interrogates; the operator answers only from the fact sheet and replies 'That has not been assessed' to anything off-sheet." }
   ],
 
   "checks": [

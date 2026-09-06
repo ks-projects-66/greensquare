@@ -4,7 +4,7 @@ import ProductDemo from '../components/ProductDemo.astro';
 import { withBase } from '../lib/paths';
 
 const method = [
-  ['Frame', 'Define the decision, not just the topic.'],
+  ['Clarify', 'Define the decision, not just the topic.'],
   ['Inspect', 'Find the evidence and assumptions underneath it.'],
   ['Test', 'Challenge the logic before confidence hardens.'],
   ['Compare', 'Expose trade-offs between credible options.'],
@@ -14,34 +14,25 @@ const method = [
 ---
 
 <BaseLayoutV2
-  title="GreenSquare | Professional judgement system"
-  description="GreenSquare is a professional judgement system that helps people frame, challenge and act on consequential decisions."
+  title="Frame | Professional judgement system"
+  description="Frame is a professional judgement system that helps people frame, challenge and act on consequential decisions."
   current="product"
 >
   <div>
-    <section class="v-section v-cream product-hero">
-      <div class="v-container hero-grid">
-        <div>
-          <p class="v-eyebrow">Introducing GreenSquare</p>
-          <h1>Better intelligence is not enough. You need better judgement.</h1>
-          <p class="v-lede">GreenSquare is the decision layer between what an AI can generate and what a professional can responsibly act on.</p>
-          <div class="v-actions">
-            <a class="v-btn v-btn-primary" href={withBase('/free/')}>Try GreenSquare Free</a>
-            <a class="v-link" href="#demo">Explore the product</a>
-          </div>
-        </div>
-        <div class="product-object" role="img" aria-label="GreenSquare product architecture">
-          <div class="product-name">GREENSQUARE</div>
-          <div class="plan available"><span>FREE</span><strong>AVAILABLE</strong></div>
-          <div class="plan"><span>PRO</span><strong>IN DEVELOPMENT</strong></div>
+    <section class="product-hero v-hero v-hero--marketing">
+      <div class="v-container">
+        <h1>Better intelligence is not enough. You need better judgement.</h1>
+        <p class="v-lead">Frame is the decision layer between what an AI can generate and what a professional can responsibly act on.</p>
+        <div class="v-actions">
+          <a class="v-btn v-btn--green" href={withBase('/free/')}>Try Frame Free</a>
+          <a class="v-link" href="#demo">Explore the product</a>
         </div>
       </div>
     </section>
 
-    <section class="v-section v-white">
+    <section class="v-section">
       <div class="v-container method-grid">
         <div class="method-intro">
-          <p class="v-eyebrow">One coherent method</p>
           <h2>From a messy situation to a defensible next move.</h2>
         </div>
         <ol>
@@ -52,10 +43,9 @@ const method = [
       </div>
     </section>
 
-    <section class="v-section v-black" id="demo">
+    <section class="v-section" id="demo">
       <div class="v-container">
         <div class="demo-head">
-          <p class="v-eyebrow">Product walkthrough</p>
           <h2>See the decision change as the evidence changes.</h2>
           <p>Move through an illustrative decision, the adaptive interrogation and the resulting Decision Brief.</p>
         </div>
@@ -63,39 +53,36 @@ const method = [
       </div>
     </section>
 
-    <section class="v-section v-green">
+    <section class="v-section">
       <div class="v-container boundary">
-        <p class="v-eyebrow">The operating boundary</p>
-        <h2>The model contributes intelligence. GreenSquare structures judgement. You remain accountable.</h2>
+        <h2>The model contributes intelligence. Frame structures judgement. You remain accountable.</h2>
       </div>
     </section>
 
-    <section class="v-section v-cream" id="plans">
+    <section class="v-section" id="plans">
       <div class="v-container">
         <div class="plans-head">
-          <p class="v-eyebrow">Plans</p>
           <h2>Start free. Move up when the work demands it.</h2>
         </div>
         <div class="plans">
           <article>
-            <div class="plan-status">AVAILABLE</div>
-            <h3>GreenSquare Free</h3>
+            <div class="plan-status">Available</div>
+            <h3>Frame Free</h3>
             <p>The adaptive decision system for individual use during beta.</p>
-            <a class="v-btn v-btn-primary" href={withBase('/free/')}>Try GreenSquare Free</a>
+            <a class="v-btn v-btn--green" href={withBase('/free/')}>Try Frame Free</a>
           </article>
           <article id="pro">
-            <div class="plan-status muted">IN DEVELOPMENT</div>
-            <h3>GreenSquare Pro</h3>
+            <div class="plan-status muted">In development</div>
+            <h3>Frame Pro</h3>
             <p>The paid plan that will follow. Scope and pricing will be announced when they are ready.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="v-section v-white">
+    <section class="v-section">
       <div class="v-container research-callout">
         <div>
-          <p class="v-eyebrow">Research boundary</p>
           <h2>We separate what the evidence shows from what the product promises.</h2>
         </div>
         <a class="v-link" href={withBase('/research/')}>Read the research record</a>
@@ -105,25 +92,17 @@ const method = [
 </BaseLayoutV2>
 
 <style>
-  .product-hero { padding-top:clamp(5rem,10vw,9rem); }
-  .hero-grid { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(19rem,.9fr); gap:clamp(3rem,8vw,8rem); align-items:center; }
-  h1 { max-width:14ch; }
-  .v-lede { max-width:40rem; }
-  .product-object { background:var(--v-black); color:var(--v-cream); border:1px solid var(--v-black); box-shadow:1rem 1rem 0 var(--v-green); }
-  .product-name { padding:1.5rem; font:700 1rem/1 var(--v-font-mono); letter-spacing:.08em; }
-  .plan { display:flex; justify-content:space-between; gap:1rem; padding:1.5rem; border-top:1px solid rgba(255,255,255,.22); }
-  .plan span { font:700 clamp(1.6rem,4vw,3rem)/1 var(--v-font-display); }
-  .plan strong { align-self:center; color:var(--v-cream-soft); font:700 .65rem/1 var(--v-font-mono); letter-spacing:.08em; }
-  .plan.available strong { color:var(--v-lime); }
+  h1 { max-width:19ch; }
+  .v-lead { max-width:40rem; }
   .method-grid { display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(3rem,9vw,9rem); align-items:start; }
   .method-intro { position:sticky; top:8rem; }
   .method-grid ol { list-style:none; margin:0; padding:0; }
   .method-grid li { display:grid; grid-template-columns:3.5rem 1fr; gap:1rem; padding:1.4rem 0; border-top:1px solid var(--v-line); }
-  .method-grid li > span { color:var(--v-green-deep); font:700 .75rem/1 var(--v-font-mono); padding-top:.35rem; }
+  .method-grid li > span { color:var(--v-green); font:600 var(--vs-label)/1 var(--vf-body); font-variant-numeric:tabular-nums; padding-top:.35rem; }
   .method-grid h3, .method-grid p { margin:0; }
   .method-grid p { color:var(--v-ink-soft); margin-top:.35rem; }
   .demo-head { max-width:47rem; margin-bottom:3rem; }
-  .demo-head > p:last-child { color:var(--v-cream-soft); }
+  .demo-head > p:last-child { color:var(--v-ink-soft); }
   .boundary { max-width:62rem; }
   .plans-head { max-width:45rem; margin-bottom:3rem; }
   .plans { display:grid; grid-template-columns:repeat(2,1fr); border:1px solid var(--v-line); }
@@ -131,13 +110,12 @@ const method = [
   .plans article + article { border-left:1px solid var(--v-line); }
   .plans p { color:var(--v-ink-soft); max-width:29rem; }
   .plans .v-btn { margin-top:auto; }
-  .plan-status { font:700 .7rem/1 var(--v-font-mono); color:var(--v-green-deep); letter-spacing:.08em; margin-bottom:4rem; }
+  .plan-status { font:600 var(--vs-label)/1 var(--vf-body); color:var(--v-green); margin-bottom:4rem; }
   .plan-status.muted { color:var(--v-ink-soft); }
   .research-callout { display:flex; justify-content:space-between; gap:3rem; align-items:end; }
   .research-callout h2 { max-width:20ch; }
   @media (max-width:760px) {
-    .hero-grid, .method-grid { grid-template-columns:1fr; }
-    .product-object { box-shadow:.65rem .65rem 0 var(--v-green); }
+    .method-grid { grid-template-columns:1fr; }
     .method-intro { position:static; }
     .plans { grid-template-columns:1fr; }
     .plans article { min-height:20rem; }

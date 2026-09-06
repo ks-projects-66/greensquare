@@ -5,10 +5,10 @@ const tabs = [
   { id: 'brief', label: 'Decision Brief' },
 ];
 ---
-<section class="product-demo" data-product-demo aria-label="Illustrative GreenSquare product demonstration">
+<section class="product-demo" data-product-demo aria-label="Illustrative Frame product demonstration">
   <div class="product-demo__topbar">
     <span class="product-demo__mark" aria-hidden="true"></span>
-    <span>GreenSquare</span>
+    <span>Frame</span>
     <span class="product-demo__status">Illustrative example</span>
   </div>
 
@@ -48,14 +48,14 @@ const tabs = [
 
     <div role="tabpanel" id="demo-panel-interrogate" aria-labelledby="demo-tab-interrogate" data-demo-panel="interrogate" hidden>
       <div class="demo-question">
-        <p class="demo-label">GreenSquare asks before advising</p>
+        <p class="demo-label">Frame asks before advising</p>
         <h3>Which evidence shows the operating model can absorb the first two regions without weakening the core business?</h3>
       </div>
       <div class="demo-evidence" role="group" aria-label="Evidence status">
-        <div><span>GIVEN</span><p>Two regions have signed expressions of interest.</p></div>
-        <div><span>DERIVED</span><p>Break-even requires 68% utilisation by month nine.</p></div>
-        <div><span>INFERRED</span><p>Current managers can support both launches.</p></div>
-        <div class="is-signal"><span>UNKNOWN</span><p>Recruitment lead time in the second region.</p></div>
+        <div><span>Given</span><p>Two regions have signed expressions of interest.</p></div>
+        <div><span>Derived</span><p>Break-even requires 68% utilisation by month nine.</p></div>
+        <div><span>Inferred</span><p>Current managers can support both launches.</p></div>
+        <div class="is-signal"><span>Unknown</span><p>Recruitment lead time in the second region.</p></div>
       </div>
     </div>
 
@@ -139,12 +139,12 @@ const tabs = [
   .product-demo__topbar, .product-demo__footer { display: flex; align-items: center; gap: var(--v-3); padding: 14px var(--v-5); font-size: var(--vs-label); }
   .product-demo__topbar { border-bottom: 1px solid var(--v-ink); font-weight: 600; }
   .product-demo__mark { width: 14px; height: 14px; background: var(--v-green); }
-  .product-demo__status { margin-left: auto; color: var(--v-ink-faint); font-weight: 400; }
-  .product-demo__tabs { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--v-line-strong); }
+  .product-demo__status { margin-left: auto; color: var(--v-ink-soft); font-weight: 400; }
+  .product-demo__tabs { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--v-line); }
   .product-demo__tabs button { display: flex; align-items: center; gap: var(--v-3); min-height: 52px; padding: 0 var(--v-5); border: 0; border-right: 1px solid var(--v-line); background: var(--v-paper); color: var(--v-ink-soft); font: inherit; font-weight: 600; cursor: pointer; text-align: left; }
   .product-demo__tabs button:last-child { border-right: 0; }
-  .product-demo__tabs button span { color: var(--v-ink-faint); font-size: var(--vs-label); font-variant-numeric: tabular-nums; }
-  .product-demo__tabs button[aria-selected='true'] { background: var(--v-fill); color: var(--v-green); box-shadow: inset 0 -3px 0 var(--v-green); }
+  .product-demo__tabs button span { color: var(--v-ink-soft); font-size: var(--vs-label); font-variant-numeric: tabular-nums; }
+  .product-demo__tabs button[aria-selected='true'] { background: var(--v-off); color: var(--v-green); box-shadow: inset 0 -3px 0 var(--v-green); }
   .product-demo__body { min-height: 480px; padding: clamp(1.5rem, 4vw, 3.25rem); }
   .product-demo__body [role='tabpanel'][hidden] { display: none; }
   .demo-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 6vw, 6rem); align-items: start; }
@@ -158,7 +158,7 @@ const tabs = [
   .demo-question { max-width: 58rem; padding-bottom: var(--v-8); border-bottom: 1px solid var(--v-line); }
   .demo-evidence { margin-top: var(--v-6); }
   .demo-evidence > div { display: grid; grid-template-columns: 8rem 1fr; gap: var(--v-5); padding: var(--v-4) 0; border-bottom: 1px solid var(--v-line); }
-  .demo-evidence span { font-size: var(--vs-label); font-weight: 700; }
+  .demo-evidence span { font-size: var(--vs-label); font-weight: 600; }
   .demo-evidence p { margin: 0; }
   .demo-evidence .is-signal { border-left: 3px solid var(--v-green); padding-left: var(--v-4); }
   .brief-head { display: flex; justify-content: space-between; gap: var(--v-8); padding-bottom: var(--v-6); border-bottom: 1px solid var(--v-line); }
@@ -169,13 +169,13 @@ const tabs = [
   .option-matrix { position: relative; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; min-height: 250px; margin: var(--v-5) 0 2.2rem 2.2rem; border-left: 1px solid var(--v-ink); border-bottom: 1px solid var(--v-ink); }
   .matrix-quadrant { display: flex; align-items: center; justify-content: center; min-height: 120px; padding: var(--v-4); border-top: 1px solid var(--v-line); border-right: 1px solid var(--v-line); color: var(--v-ink-soft); font-size: var(--vs-small); text-align: center; }
   .matrix-quadrant--best { background: var(--v-green); color: var(--v-cream); font-weight: 600; }
-  .axis { position: absolute; color: var(--v-ink-faint); font-size: var(--vs-label); }
+  .axis { position: absolute; color: var(--v-ink-soft); font-size: var(--vs-label); }
   .axis--x { left: 50%; bottom: -2rem; transform: translateX(-50%); }
   .axis--y { left: -2.3rem; top: 50%; writing-mode: vertical-rl; transform: translateY(-50%) rotate(180deg); }
   .brief-notes { border-top: 2px solid var(--v-ink); }
   .brief-notes > div { padding: var(--v-3) 0; border-bottom: 1px solid var(--v-line); }
   .brief-notes p:last-child { margin: var(--v-1) 0 0; color: var(--v-ink-soft); font-size: var(--vs-small); }
-  .product-demo__footer { justify-content: space-between; border-top: 1px solid var(--v-line-strong); color: var(--v-ink-faint); }
+  .product-demo__footer { justify-content: space-between; border-top: 1px solid var(--v-line); color: var(--v-ink-soft); }
   @media (max-width: 760px) {
     .product-demo__tabs button { flex-direction: column; align-items: flex-start; justify-content: center; gap: 0; min-height: 62px; padding-inline: var(--v-3); }
     .product-demo__body { min-height: 0; }

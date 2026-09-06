@@ -10,8 +10,9 @@ export interface Props {
   description: string;
   current?: string;
   ogType?: string;
+  noindex?: boolean;
 }
-const { title, description, current = '', ogType = 'website' } = Astro.props;
+const { title, description, current = '', ogType = 'website', noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImage = new URL(withBase('/assets/og-image.png'), Astro.site).toString();
 ---
@@ -23,6 +24,7 @@ const ogImage = new URL(withBase('/assets/og-image.png'), Astro.site).toString()
     <script is:inline>document.documentElement.classList.add('js');</script>
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <!-- Matches the sticky nav, which is what the browser chrome abuts, not the white page body. -->
     <meta name="theme-color" content="#10110f" />
@@ -40,10 +42,31 @@ const ogImage = new URL(withBase('/assets/og-image.png'), Astro.site).toString()
     <link rel="apple-touch-icon" href={withBase('/assets/apple-touch-icon.png')} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Manrope 400/500 and IBM Plex Mono carry the benchmark page's design language
-         (see benchmark.astro --f / --m). Without them that page falls back to system faces. -->
+    <!-- Three faces, matching the design language and nothing more. IBM Plex Mono is gone:
+         it was not in the guideline, and it was being asked for at weight 700 while only
+         400 and 500 were loaded, so the browser synthesised the bold. Space Grotesk ships
+         Semibold alone, which is the only weight the guideline gives it.
+
+         The two faces load with different `display` values on purpose, which is why this
+         is two requests rather than one.
+
+         Reading text swaps. A paragraph reflowing costs a little shift and the reader
+         genuinely wants the brand face for the text they spend their time in.
+
+         Headings do not swap. Space Grotesk sets h1 and h2 only: a handful of large words
+         under `text-wrap: balance`, where a small change in glyph advance moves a wrap
+         point, changes the line count and moves everything below the heading. On /free/
+         that measured 0.105 CLS against a 0.1 budget. The metric-matched fallbacks cannot
+         reach it, because they correct the line box, not where a line breaks. With
+         `optional` the heading either has the face from the first paint or keeps the
+         fallback for that visit, and never moves either way. The face is still fetched and
+         cached, so the second visit has it. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=optional"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Manrope:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&display=optional"
       rel="stylesheet"
     />
   </head>

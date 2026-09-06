@@ -1,0 +1,219 @@
+---
+import { frameProcess as story } from '../data/frame-process';
+import FrameProcessMotion from './FrameProcessMotion.astro';
+interface Props { state?: number; id?: string; animated?: boolean; }
+const { state = 7, id = 'frame-process', animated = false } = Astro.props;
+const phase = Math.max(1, Math.min(7, Math.round(state)));
+const current = story.states[phase - 1];
+---
+
+<figure id={id} class="frame-process" data-frame-process data-animated={animated || undefined} data-state={current.id} aria-labelledby={`${id}-title`} aria-describedby={`${id}-description`}>
+  <figcaption class="fp-intro">
+    <h2 id={`${id}-title`}>Frame changes how you reach a decision.</h2>
+    <p>A portable decision system for the AI you already use. It challenges the question, tests the options and leaves the call with you.</p>
+  </figcaption>
+  <p id={`${id}-description`} class="fp-equivalent">In this illustrative business decision, facts, constraints, assumptions and goals inform the initial question: should we expand? Limited capacity changes it to: how should we grow without overloading the business? Four alternatives are compared against growth, capacity, cost, risk and reversibility. The assumption that managers can absorb more is tested. A finding of no spare management time reduces support for immediate expansion. Staged expansion is supported only if capacity is released before each stage. Demand durability remains uncertain. Reasons, trade-offs, conditions and a next step support the human decision.</p>
+
+  {animated && <FrameProcessMotion />}
+  <div class="fp-static">
+  <div class="fp-canvas" data-phase={phase}>
+    {phase <= 2 && <div class="fp-inputs" data-part="inputs">
+      {story.inputs.map((input) => <div class="fp-input" data-input={input.id}>
+        <strong>{input.name}</strong>
+        {input.lines.map(line => <span>{line}</span>)}
+      </div>)}
+    </div>}
+
+    {phase === 2 && <>
+      <svg class="fp-input-connections fp-wide" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path d="M115 0V35H885V0 M372 0V35 M628 0V35 M500 35V100" /></svg>
+      <svg class="fp-input-connections fp-narrow" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path d="M1000 0V40H500V100" /></svg>
+      <div class="fp-initial" data-part="initial-question"><span>Initial question</span><p>{story.initialQuestion}</p></div>
+    </>}
+
+    {phase === 3 && <div class="fp-reframing" data-part="reframe">
+      <div class="fp-pressure"><span>Capacity constraint</span><strong>The team is near capacity</strong><span>Protect service quality</span></div>
+      <div class="fp-old"><span>Initial question</span><p>{story.initialQuestion}</p><i aria-hidden="true"></i></div>
+      <svg class="fp-reframe-connection fp-wide" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path d="M150 0V50H500V100 M710 0V50H500" /></svg>
+      <svg class="fp-reframe-connection fp-narrow" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path d="M500 0V100" /></svg>
+      <div class="fp-new"><span>The decision changes</span><p>How should we grow <em>without overloading</em> the business?</p></div>
+    </div>}
+
+    {phase >= 4 && <>
+      <div class="fp-question" data-part="reframed-question">
+        {phase === 7 && <span class="fp-question-origin">{story.initialQuestion} <span>Reframed around capacity</span></span>}
+        <p>{story.question}</p>
+      </div>
+
+      {phase >= 5 && <div class="fp-criteria" data-part="criteria"><span>Same criteria for every option</span><ul>{story.criteria.map(name => <li class:list={{ 'is-active': name === 'Capacity' }}>{name}</li>)}</ul></div>}
+
+      <div class="fp-alternatives" data-part="alternatives">
+        <svg class="fp-option-connections fp-wide" viewBox="0 0 1000 64" preserveAspectRatio="none" aria-hidden="true"><path d="M500 0V24 M115 64V24H885V64 M372 24V64 M628 24V64" /></svg>
+        <svg class="fp-option-connections fp-narrow" viewBox="0 0 320 52" preserveAspectRatio="none" aria-hidden="true"><path d="M160 0V22H0V52" /></svg>
+        <div class="fp-options">
+          {story.options.map(option => <div class:list={['fp-option', { 'is-supported': phase >= 6 && option.id === 'stages', 'is-considered': phase === 7 && option.id !== 'stages' }]} data-option={option.id}>
+            <strong>{option.name}</strong>
+            {phase >= 5 && phase <= 6 && <div class="fp-option-evidence"><span>{phase >= 6 ? option.after : option.before}</span><small>{option.tradeoff}</small></div>}
+          </div>)}
+        </div>
+      </div>
+
+      {phase >= 6 && <div class="fp-feedback" data-part="feedback">
+        <svg class="fp-feedback-route fp-wide" viewBox="0 0 1000 140" preserveAspectRatio="none" aria-hidden="true"><path class="fp-return" d="M120 0V104H945V24H650" /><path d="M650 24H372V0" /></svg>
+        <svg class="fp-feedback-route fp-narrow" viewBox="0 0 320 160" preserveAspectRatio="none" aria-hidden="true"><path class="fp-return" d="M0 0V144H304V16H280" /><path d="M280 16H0V0" /></svg>
+        <div class="fp-feedback-copy"><span class="fp-unknown">Can managers absorb more?</span><span class="fp-test">Capacity check</span><strong class="fp-finding">No spare management time</strong></div>
+      </div>}
+
+      {phase === 7 && <div class="fp-resolution" data-part="resolution">
+        <div class="fp-fields">{story.fields.map(field => <div class="fp-field" data-field={field.name}>
+          <h3>{field.name}</h3><p>{field.text}</p>{field.name !== 'Direction' && <span>{field.detail}</span>}
+        </div>)}</div>
+        <p class="fp-human" data-part="human-checkpoint"><span aria-hidden="true"></span>You make the call</p>
+      </div>}
+    </>}
+    <p class="fp-state-caption">{current.caption}</p>
+  </div>
+  <p class="fp-example">Illustrative business situation. The capacity finding shows how new evidence can change a direction.</p>
+  </div>
+</figure>
+
+<style>
+  .frame-process { margin: 0; color: var(--v-ink); background: var(--v-paper); font-family: var(--vf-body); }
+  .fp-intro { max-width: 56rem; margin-bottom: var(--v-10); }
+  .fp-intro h2 { font: 600 var(--vs-h2)/1.16 var(--vf-display); letter-spacing: -.025em; text-wrap: balance; }
+  .fp-intro p { font-size: var(--vs-body); line-height: 1.6; color: var(--v-ink-soft); max-width: 65ch; margin-top: var(--v-5); }
+  .fp-equivalent { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .fp-canvas { position: relative; min-height: 540px; padding-bottom: var(--v-10); }
+  .fp-canvas p { margin: 0; }
+  .fp-canvas svg { overflow: visible; pointer-events: none; }
+  .fp-canvas path { fill: none; stroke: var(--v-ink-soft); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .fp-inputs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--v-5); padding-top: var(--v-8); }
+  .fp-input { border: 1px solid var(--v-ink-soft); padding: var(--v-5); display: flex; flex-direction: column; gap: var(--v-2); font-size: var(--vs-small); line-height: 1.45; background: var(--v-paper); }
+  .fp-input strong { font-weight: 600; margin-bottom: var(--v-3); }
+  .fp-input span { color: var(--v-ink-soft); }
+  [data-phase="1"] .fp-inputs { padding-top: var(--v-12); align-items: start; }
+  [data-phase="1"] .fp-input:nth-child(2) { margin-top: var(--v-8); }
+  [data-phase="1"] .fp-input:nth-child(3) { margin-top: var(--v-5); border-style: dashed; }
+  [data-phase="1"] .fp-input:nth-child(4) { margin-top: var(--v-10); }
+  .fp-input[data-input="assumptions"] { border-style: dashed; }
+  .fp-input-connections { display: block; width: 100%; height: 72px; }
+  .fp-initial { width: min(32rem, 100%); margin-inline: auto; padding: var(--v-6); border: 1px solid var(--v-ink); }
+  .fp-initial span, .fp-old > span, .fp-pressure > span, .fp-new > span { font-size: var(--vs-label); color: var(--v-ink-soft); }
+  .fp-initial p { margin-top: var(--v-4); font-size: clamp(1.6rem, 3vw, 2.5rem); line-height: 1.2; }
+  .fp-reframing { display: grid; grid-template-columns: 1fr 1.4fr; column-gap: var(--v-12); padding-top: var(--v-5); }
+  .fp-pressure { display: flex; flex-direction: column; gap: var(--v-3); justify-content: center; padding: var(--v-5); border: 1px solid var(--v-ink); }
+  .fp-pressure strong { font-size: var(--vs-h3); font-weight: 500; }
+  .fp-old { position: relative; border: 1px solid var(--v-line); border-bottom: 0; padding: var(--v-5); }
+  .fp-old p { color: var(--v-ink-soft); margin-top: var(--v-4); font-size: clamp(1.5rem, 2.5vw, 2rem); }
+  .fp-old i { position: absolute; width: 35%; height: 1px; bottom: -12px; right: -12px; background: var(--v-line); }
+  .fp-reframe-connection { grid-column: 1 / -1; width: 100%; height: 60px; }
+  .fp-reframe-connection path { stroke: var(--v-green); stroke-width: 2; }
+  .fp-new { grid-column: 1 / -1; border: 2px solid var(--v-green); padding: var(--v-6) var(--v-8); }
+  .fp-new p { max-width: 31ch; font-size: clamp(1.8rem, 3.6vw, 3.1rem); line-height: 1.2; letter-spacing: -.02em; margin-top: var(--v-4); }
+  .fp-new em { font-style: normal; background: var(--v-lime); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .fp-question { max-width: 45rem; margin: 0 auto; padding: var(--v-5) var(--v-6); border: 1px solid var(--v-green); }
+  .fp-question p { font-size: clamp(1.4rem, 2.3vw, 2rem); line-height: 1.3; text-wrap: balance; }
+  .fp-question-origin { display: flex; justify-content: space-between; gap: var(--v-4); font-size: var(--vs-label); color: var(--v-ink-soft); margin-bottom: var(--v-4); }
+  .fp-question-origin > span { text-align: right; }
+  .fp-criteria { display: flex; justify-content: space-between; gap: var(--v-5); align-items: center; border-block: 1px solid var(--v-line); padding-block: var(--v-4); margin-top: var(--v-6); }
+  .fp-criteria > span { color: var(--v-ink-soft); font-size: var(--vs-label); }
+  .fp-criteria ul { list-style: none; padding: 0; margin: 0; display: flex; gap: var(--v-5); font-size: var(--vs-small); }
+  .fp-criteria li.is-active { font-weight: 600; color: var(--v-green); border-bottom: 2px solid var(--v-green); }
+  .fp-option-connections { display: block; width: 100%; height: 56px; }
+  .fp-options { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--v-5); }
+  .fp-option { border: 1px solid var(--v-ink-soft); padding: var(--v-5); background: var(--v-paper); min-height: 108px; }
+  .fp-option strong { display: block; font-size: var(--vs-h4); font-weight: 500; line-height: 1.4; }
+  .fp-option-evidence { margin-top: var(--v-5); border-top: 1px solid var(--v-line); padding-top: var(--v-4); display: flex; flex-direction: column; gap: var(--v-2); color: var(--v-ink-soft); font-size: var(--vs-small); line-height: 1.4; }
+  .fp-option-evidence small { font-size: var(--vs-label); }
+  .fp-option.is-supported { border: 2px solid var(--v-green); padding: calc(var(--v-5) - 1px); }
+  .fp-option.is-supported .fp-option-evidence { color: var(--v-green); font-weight: 500; }
+  .fp-option.is-considered { border-color: var(--v-line); }
+  .fp-option.is-considered strong { color: var(--v-ink-soft); }
+  .fp-feedback { position: relative; margin-top: 0; height: 150px; padding-top: var(--v-8); }
+  .fp-feedback-route { position: absolute; inset: 0; width: 100%; height: 132px; }
+  .fp-feedback-route path { stroke: var(--v-green); stroke-width: 2; }
+  .fp-feedback-route .fp-return { stroke-dasharray: 5 5; stroke: var(--v-ink-soft); stroke-width: 1; }
+  .fp-feedback-copy { position: relative; display: flex; width: fit-content; max-width: 90%; margin: 0 auto; background: var(--v-paper); align-items: center; gap: var(--v-5); padding: var(--v-3) var(--v-4); font-size: var(--vs-small); }
+  .fp-unknown { border-bottom: 1px dashed var(--v-ink-soft); }
+  .fp-test { color: var(--v-ink-soft); }
+  .fp-finding { font-weight: 500; color: var(--v-green); }
+  .fp-fields { border-top: 2px solid var(--v-green); border-bottom: 1px solid var(--v-line); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--v-5); padding-block: var(--v-5); }
+  .fp-field h3 { font: 600 var(--vs-label)/1.4 var(--vf-body); margin: 0 0 var(--v-4); }
+  .fp-field p { font-size: var(--vs-h4); font-weight: 500; line-height: 1.4; }
+  .fp-field > span { display: block; font-size: var(--vs-label); color: var(--v-ink-soft); line-height: 1.45; margin-top: var(--v-3); }
+  .fp-field:first-child p { color: var(--v-green); }
+  .fp-human { display: flex; align-items: center; justify-content: flex-end; gap: var(--v-3); padding-top: var(--v-5); font-size: var(--vs-h3); font-weight: 500; }
+  .fp-human > span { width: 12px; height: 12px; border: 2px solid var(--v-green); }
+  .fp-state-caption { position: absolute; bottom: 0; max-width: 65ch; font-size: var(--vs-small); color: var(--v-ink-soft); line-height: 1.5; }
+  .fp-example { margin: var(--v-6) 0 0; padding-top: var(--v-4); border-top: 1px solid var(--v-line); color: var(--v-ink-soft); font-size: var(--vs-label); line-height: 1.5; }
+  .fp-narrow { display: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .frame-process[data-animated]:not([data-show-static]) .fp-static { display: none; }
+  }
+  [data-phase="7"] .fp-option { min-height: 80px; }
+  [data-phase="7"] .fp-feedback { height: auto; padding: var(--v-5) 0; }
+  [data-phase="7"] .fp-feedback-route { display: none; }
+  [data-phase="7"] .fp-feedback-copy { margin: 0; max-width: 100%; padding: 0; }
+  @media (max-width: 1000px) {
+    .fp-input, .fp-option { padding: var(--v-4); }
+    .fp-option.is-supported { padding: calc(var(--v-4) - 1px); }
+    .fp-options, .fp-inputs { gap: var(--v-4); }
+    .fp-criteria { align-items: flex-start; flex-direction: column; gap: var(--v-3); }
+    .fp-feedback-copy { gap: var(--v-4); }
+    .fp-reframing { column-gap: var(--v-8); }
+    .fp-fields { grid-template-columns: 1fr 1fr; gap: var(--v-6); }
+  }
+  @media (max-width: 600px) {
+    .fp-intro { margin-bottom: var(--v-8); }
+    .fp-canvas { min-height: 480px; padding-bottom: var(--v-12); }
+    .fp-inputs { position: relative; grid-template-columns: 1fr; padding-top: 0; gap: var(--v-4); }
+    .fp-input { position: relative; padding: var(--v-4); font-size: var(--vs-small); display: grid; grid-template-columns: 84px 1fr; gap: var(--v-2) var(--v-3); }
+    .fp-input strong { grid-row: span 2; margin: 0; }
+    [data-phase="2"] .fp-inputs { padding-right: var(--v-4); border-right: 1px solid var(--v-ink-soft); }
+    [data-phase="2"] .fp-input::after { content: ''; position: absolute; right: calc(var(--v-4) * -1); top: 50%; width: var(--v-4); height: 1px; background: var(--v-ink-soft); }
+    [data-phase="1"] .fp-inputs { padding-top: var(--v-5); }
+    [data-phase="1"] .fp-input:nth-child(n) { margin-top: 0; }
+    [data-phase="1"] .fp-input:nth-child(even) { margin-left: var(--v-4); }
+    .fp-input-connections { height: 52px; }
+    .fp-initial { padding: var(--v-5); }
+    .fp-reframing { grid-template-columns: 1fr; padding-top: 0; row-gap: var(--v-5); }
+    .fp-pressure { position: relative; padding: var(--v-4); }
+    .fp-pressure::after { content: ''; position: absolute; width: 2px; height: var(--v-5); left: 50%; bottom: calc(var(--v-5) * -1); background: var(--v-green); }
+    .fp-old { padding: var(--v-4); }
+    .fp-reframe-connection { height: 28px; margin-top: calc(var(--v-5) * -1); }
+    .fp-new { padding: var(--v-5); }
+    .fp-new p { font-size: 1.8rem; }
+    .fp-question { padding: var(--v-5); }
+    .fp-question p { font-size: 1.4rem; }
+    .fp-question-origin { flex-direction: column; gap: var(--v-2); }
+    .fp-question-origin > span { text-align: left; }
+    .fp-criteria ul { flex-wrap: wrap; gap: var(--v-2) var(--v-4); }
+    .fp-options { grid-template-columns: 1fr; row-gap: var(--v-4); padding-left: var(--v-4); border-left: 1px solid var(--v-ink-soft); }
+    .fp-option { min-height: 88px; position: relative; padding: var(--v-4); display: grid; grid-template-columns: .85fr 1.15fr; gap: var(--v-4); align-items: center; }
+    [data-phase="4"] .fp-option { display: block; min-height: 64px; }
+    .fp-option strong { font-size: 1rem; }
+    .fp-option::before { content: ''; position: absolute; width: var(--v-4); height: 1px; left: calc(var(--v-4) * -1); top: 50%; background: var(--v-ink-soft); }
+    .fp-option-evidence { font-size: var(--vs-label); margin: 0; padding: 0; border: 0; }
+    .fp-wide { display: none; }
+    .fp-narrow { display: block; height: 44px; }
+    .fp-feedback { height: 210px; padding-top: var(--v-6); }
+    .fp-feedback-route { height: 196px; }
+    .fp-feedback-copy { flex-direction: column; align-items: flex-start; gap: var(--v-3); max-width: 80%; padding: var(--v-4); }
+    .fp-fields { grid-template-columns: 1fr; gap: 0; padding-block: 0; }
+    .fp-field { padding-block: var(--v-5); border-bottom: 1px solid var(--v-line); }
+    .fp-field:last-child { border: 0; }
+    .fp-field h3 { margin-bottom: var(--v-2); }
+    .fp-field > span { margin-top: var(--v-2); }
+    .fp-human { justify-content: flex-start; }
+    [data-phase="7"] .fp-options { grid-template-columns: 1fr 1fr; padding: 0; border: 0; gap: var(--v-3); }
+    [data-phase="7"] .fp-option { display: block; min-height: 76px; }
+    [data-phase="7"] .fp-option::before { display: none; }
+    [data-phase="7"] .fp-option-connections { display: none; }
+    [data-phase="7"] .fp-alternatives { padding-top: var(--v-5); }
+    [data-phase="7"] .fp-feedback-copy { gap: var(--v-2); font-size: var(--vs-label); }
+    [data-phase="7"] .fp-question { padding: var(--v-4); }
+    [data-phase="7"] .fp-question-origin { gap: var(--v-1); margin-bottom: var(--v-3); }
+    [data-phase="7"] .fp-field { padding-block: var(--v-4); }
+    [data-phase="7"] .fp-state-caption { display: none; }
+    [data-phase="7"] { padding-bottom: 0; }
+  }
+</style>

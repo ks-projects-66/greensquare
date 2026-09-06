@@ -8,15 +8,15 @@ description: The terms governing use of the GreenSquare AI website and products.
 
 Last updated: 1 September 2026
 
-These terms govern your use of www.greensquare.ai, run by GreenSquare AI. By using the site, joining the beta list, or requesting GreenSquare Free, you agree to them.
+These terms govern your use of www.greensquare.ai, run by GreenSquare AI. By using the site, joining the beta list, or requesting Frame Free, you agree to them.
 
 ## What the site is
 
-The site describes GreenSquare AI's products and lets you request GreenSquare Free. Nothing is currently for sale. GreenSquare Pro is in development. These terms will be updated to cover purchase, payment and refunds before any checkout is available.
+The site describes GreenSquare AI's products and lets you request Frame Free. Nothing is currently for sale. Frame Pro is in development. These terms will be updated to cover purchase, payment and refunds before any checkout is available.
 
-## GreenSquare Free and GreenSquare Pro
+## Frame Free and Frame Pro
 
-GreenSquare Free, GreenSquare Pro, the writing on this site and the methodology behind GreenSquare are ours, protected by copyright and other rights. You may use material we send you for your own decisions. You may not resell it, republish it or present it as your own. We give you a personal, non-transferable right to use it, and nothing more.
+Frame Free, Frame Pro, the writing on this site and the methodology behind Frame are ours, protected by copyright and other rights. You may use material we send you for your own decisions. You may not resell it, republish it or present it as your own. We give you a personal, non-transferable right to use it, and nothing more.
 
 Where the site describes products that are not yet available, those descriptions are for information. Features, names and timing may change before anything is released.
 
@@ -26,7 +26,7 @@ Please use the site as intended. You agree not to interfere with the site or its
 
 ## Guidance only
 
-GreenSquare helps you think through a decision. You remain responsible for the decisions you make and the actions you take. Seek qualified legal, financial, tax, or other professional advice when the consequences require it.
+Frame helps you think through a decision. You remain responsible for the decisions you make and the actions you take. Seek qualified legal, financial, tax, or other professional advice when the consequences require it.
 
 ## Availability
 

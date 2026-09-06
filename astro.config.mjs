@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://www.greensquare.ai',
-  integrations: [react(), mdx(), sitemap()],
+  integrations: [react(), mdx(), sitemap({ filter: (page) => !page.includes('/frame-storyboard/') })],
   redirects: {
     '/decision-frame': '/free',
     '/evidence': '/research',

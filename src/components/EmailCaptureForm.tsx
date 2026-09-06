@@ -16,8 +16,8 @@ export interface Props {
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
 export default function EmailCaptureForm({
-  buttonLabel = 'Email me GreenSquare Free',
-  fineprint = 'Confirm your address to receive GreenSquare Free and occasional product updates. Unsubscribe at any time.',
+  buttonLabel = 'Email me Frame Free',
+  fineprint = 'Confirm your address to receive Frame Free and occasional product updates. Unsubscribe at any time.',
   dark = false,
 }: Props) {
   const [email, setEmail] = useState('');
@@ -37,6 +37,9 @@ export default function EmailCaptureForm({
     const attribution = readAttribution();
     const analytics = attributionAnalyticsProperties(attribution);
     setStatus('loading');
+    /* The analytics event names keep the old product name on purpose. They are the
+       keys of a running time series, and renaming them splits the funnel in two
+       with no way to join the halves. They are never rendered. */
     track('GreenSquare Free Signup Attempt', analytics);
     try {
       const res = await fetch(KIT_FORM_ENDPOINT, {
@@ -62,7 +65,7 @@ export default function EmailCaptureForm({
     return (
       <div className="field-row-wrapper" style={{ minHeight: '4.75rem' }}>
         <p className="form-status form-status--success" role="status">
-          Check your inbox and confirm your address. GreenSquare Free will arrive immediately after.
+          Check your inbox and confirm your address. Frame Free will arrive immediately after.
         </p>
       </div>
     );
