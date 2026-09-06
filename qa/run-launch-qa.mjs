@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const base = 'http://127.0.0.1:4321';
+const base = process.env.QA_BASE_URL || 'http://127.0.0.1:4321';
 const routes = ['/', '/product/', '/free/', '/research/', '/benchmark/', '/about/'];
 const viewports = [
   { name: 'desktop', width: 1440, height: 1000 },
@@ -121,7 +121,11 @@ for (const viewport of viewports) {
 
     if (route === '/') {
       if (await page.getByRole('link', { name: /Try Frame Free/i }).count() < 1) errors.push('Primary Free CTA missing');
-      if (await page.locator('[data-decision-passage]').count() !== 1) errors.push('Decision animation missing');
+      if (await page.locator('[data-frame-process]').count() !== 1) errors.push('Decision process missing');
+      const processDescription = await page.locator('[data-frame-process]').evaluate(root => document.getElementById(root.getAttribute('aria-describedby'))?.textContent || '');
+      for (const phrase of ['Should we expand?', 'without overloading the business?', 'Demand durability remains uncertain', 'human decision']) {
+        if (!processDescription.toLowerCase().includes(phrase.toLowerCase())) errors.push(`Accessible decision meaning missing: ${phrase}`);
+      }
     }
     if (route === '/free/') {
       if (await page.getByLabel('Email address').count() !== 1) errors.push('Email input missing');
@@ -250,12 +254,15 @@ const reduced = await browser.newContext({ viewport: viewports[0], reducedMotion
 const reducedPage = await reduced.newPage();
 await reducedPage.goto(base + '/', { waitUntil: 'domcontentloaded' });
 const reducedState = await reducedPage.evaluate(() => {
-  const root = document.querySelector('[data-decision-passage]');
-  const motion = root?.querySelector('.through-flow__desktop .through-flow__motion');
-  const still = root?.querySelector('.through-flow__desktop .through-flow__still');
-  return { motion: motion ? getComputedStyle(motion).display : 'missing', still: still ? getComputedStyle(still).display : 'missing' };
+  const root = document.querySelector('[data-frame-process]');
+  return {
+    state: root?.getAttribute('data-state'),
+    fields: root?.querySelectorAll('[data-field]').length,
+    text: root?.textContent,
+    runningAnimations: root?.getAnimations({ subtree: true }).filter(a => a.playState === 'running').length,
+  };
 });
-const reducedPassed = reducedState.motion === 'none' && reducedState.still !== 'none';
+const reducedPassed = reducedState.state === 'decision' && reducedState.fields === 4 && reducedState.runningAnimations === 0 && reducedState.text.includes('You make the call');
 if (!reducedPassed) failed = true;
 results.push({ route: '/', viewport: 'desktop-reduced-motion', reducedState, passed: reducedPassed });
 await reduced.close();

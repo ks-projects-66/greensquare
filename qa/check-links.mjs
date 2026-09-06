@@ -1,6 +1,6 @@
 import { request } from 'node:http';
 
-const base = new URL('http://127.0.0.1:4321/');
+const base = new URL(process.env.QA_BASE_URL || 'http://127.0.0.1:4321/');
 const seeds = ['/', '/product/', '/free/', '/research/', '/benchmark/', '/about/', '/methodology/'];
 
 const get = (pathname) => new Promise((resolve, reject) => {

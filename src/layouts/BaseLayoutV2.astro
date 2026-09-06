@@ -10,8 +10,9 @@ export interface Props {
   description: string;
   current?: string;
   ogType?: string;
+  noindex?: boolean;
 }
-const { title, description, current = '', ogType = 'website' } = Astro.props;
+const { title, description, current = '', ogType = 'website', noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImage = new URL(withBase('/assets/og-image.png'), Astro.site).toString();
 ---
@@ -23,6 +24,7 @@ const ogImage = new URL(withBase('/assets/og-image.png'), Astro.site).toString()
     <script is:inline>document.documentElement.classList.add('js');</script>
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <!-- Matches the sticky nav, which is what the browser chrome abuts, not the white page body. -->
     <meta name="theme-color" content="#10110f" />

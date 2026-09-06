@@ -1,0 +1,30 @@
+---
+import BaseLayoutV2 from '../../layouts/BaseLayoutV2.astro';
+import FrameProcessAnimation from '../../components/FrameProcessAnimation.astro';
+import { frameProcess } from '../../data/frame-process';
+import { withBase } from '../../lib/paths';
+export function getStaticPaths() {
+  if (import.meta.env.VERCEL_ENV === 'production') return [];
+  return frameProcess.states.map((state, index) => ({ params: { state: state.id }, props: { phase: index + 1 } }));
+}
+const { phase } = Astro.props;
+---
+<BaseLayoutV2 title="Frame process storyboard | GreenSquare AI" description="Review seven static states of the Frame decision process." noindex>
+  <section class="v-container storyboard">
+    <h1>Frame process storyboard</h1>
+    <p>Static composition review. Select a state to inspect it at your screen size.</p>
+    <nav aria-label="Storyboard states">{frameProcess.states.map((state, index) => <a href={withBase(`/frame-storyboard/${state.id}/`)} aria-current={phase === index + 1 ? 'step' : undefined}>{index + 1}. {state.name}</a>)}</nav>
+    <FrameProcessAnimation state={phase} />
+    <a class="v-link" href={withBase('/#frame-process')}>See the proposed homepage placement</a>
+  </section>
+</BaseLayoutV2>
+<style>
+  .storyboard { padding-block: var(--v-8) var(--v-12); }
+  h1 { font-size: var(--vs-h3); font-family: var(--vf-body); }
+  .storyboard > p { color: var(--v-ink-soft); margin-top: var(--v-3); font-size: var(--vs-small); }
+  nav { display: flex; flex-wrap: wrap; gap: var(--v-2); margin-block: var(--v-5) var(--v-10); padding-bottom: var(--v-5); border-bottom: 1px solid var(--v-line); }
+  nav a { padding: var(--v-3) var(--v-4); border: 1px solid var(--v-line); font-size: var(--vs-label); text-decoration: none; color: var(--v-ink-soft); }
+  nav a[aria-current] { background: var(--v-green); color: var(--v-paper); border-color: var(--v-green); }
+  nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .storyboard > .v-link { display: inline-block; margin-top: var(--v-6); }
+</style>

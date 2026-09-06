@@ -1,0 +1,149 @@
+---
+import { frameProcess as story } from '../data/frame-process';
+---
+<div class="fm" data-frame-motion>
+  <div class="fm-travel" data-motion-travel>
+    <div class="fm-stage" data-motion-stage>
+      <div class="fm-scene" data-motion-scene aria-hidden="true">
+        <svg class="fm-routes" data-motion-routes focusable="false">
+          <path data-route="inputs" />
+          <path data-route="pressure" class="fm-active-route" />
+          <path data-route="options" />
+          <path data-route="criteria" class="fm-active-route" />
+          <path data-route="outbound" class="fm-open-route" />
+          <path data-route="inbound" class="fm-active-route" />
+          <path data-route="resolution" class="fm-active-route" />
+        </svg>
+        <div class="fm-inputs" data-motion-inputs>
+          {story.inputs.map(input => <div class="fm-input fm-node" data-motion-input={input.id}>
+            <strong>{input.name}</strong>{input.lines.map(text => <span>{text}</span>)}
+          </div>)}
+        </div>
+        <div class="fm-pressure fm-node" data-motion-pressure><span>Capacity constraint</span><strong>The team is near capacity</strong><span>Protect service quality</span></div>
+        <div class="fm-question" data-motion-question>
+          <svg class="fm-question-boundary" focusable="false"><path data-question-boundary /></svg>
+          <div class="fm-question-old" data-question-old><span>Initial question</span><p>{story.initialQuestion}</p></div>
+          <div class="fm-question-new" data-question-new><span>The decision changes</span><p>How should we grow <em>without overloading</em> the business?</p></div>
+        </div>
+        <div class="fm-criteria" data-motion-criteria><span>Same criteria for every option</span><ul>{story.criteria.map(c => <li data-criterion={c}>{c}</li>)}</ul></div>
+        {story.options.map(option => <div class="fm-option fm-node" data-motion-option={option.id}>
+          <strong>{option.name}</strong>
+          <div class="fm-evidence" data-option-evidence>
+            <span data-evidence-before>{option.before}</span>
+            <span data-evidence-after>{option.after}</span>
+            <small>{option.tradeoff}</small>
+          </div>
+        </div>)}
+        <div class="fm-loop fm-node" data-motion-loop>
+          <span data-loop-question>Can managers absorb more?</span>
+          <span data-loop-test>Capacity check</span>
+          <strong data-loop-finding>No spare management time</strong>
+        </div>
+        <div class="fm-outcome" data-motion-outcome>
+          {story.fields.map(field => <div class="fm-field" data-motion-field={field.name}>
+            <h3>{field.name}</h3><p>{field.text}</p>{field.name !== 'Direction' && <span>{field.detail}</span>}
+          </div>)}
+          <p class="fm-human" data-motion-human><i></i>You make the call</p>
+        </div>
+      </div>
+      <div class="fm-caption" data-motion-caption aria-hidden="true">{story.states[0].caption}</div>
+      <div class="fm-controls">
+        <span class="fm-scroll-hint">Scroll to follow the decision</span>
+        <button type="button" data-motion-play>Pause explanation</button>
+        <button type="button" data-motion-read aria-expanded="false">Read the full explanation</button>
+      </div>
+    </div>
+  </div>
+  <p class="fm-example">Illustrative business situation. The capacity finding shows how new evidence can change a direction.</p>
+</div>
+<script>
+  import { observeFrameProcesses } from '../scripts/frame-process';
+  const stop = observeFrameProcesses();
+  if (import.meta.hot) import.meta.hot.dispose(stop);
+</script>
+<style>
+  .fm { display: none; --fm-scene-height: 650px; --fm-stage-height: 750px; }
+  .fm-stage { height: var(--fm-stage-height); background: var(--v-paper); }
+  .fm-scene { position: relative; height: var(--fm-scene-height); isolation: isolate; }
+  .fm-routes { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; z-index: -1; }
+  .fm-routes path, .fm-question-boundary path { fill: none; stroke: var(--v-ink-soft); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .fm-routes .fm-active-route { stroke: var(--v-green); stroke-width: 2; }
+  .fm-routes .fm-open-route { stroke-dasharray: 5 5; }
+  .fm-node { position: absolute; border: 1px solid var(--v-ink-soft); background: var(--v-paper); padding: var(--v-5); font-size: var(--vs-small); line-height: 1.4; }
+  .fm-node strong { display: block; font-size: var(--vs-h4); font-weight: 500; }
+  .fm-inputs { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--v-5); padding-top: var(--v-8); }
+  .fm-input { position: relative; display: flex; flex-direction: column; gap: var(--v-2); }
+  .fm-input strong { margin-bottom: var(--v-3); font-weight: 600; }
+  .fm-input span { color: var(--v-ink-soft); }
+  .fm-input[data-motion-input="assumptions"] { border-style: dashed; }
+  .fm-pressure, .fm-question, .fm-criteria, .fm-option, .fm-loop, .fm-outcome, .fm-routes { visibility: hidden; }
+  .fm-pressure { display: flex; flex-direction: column; gap: var(--v-3); }
+  .fm-pressure > span { color: var(--v-ink-soft); font-size: var(--vs-label); }
+  .fm-question { position: absolute; }
+  .fm-question-boundary { position: absolute; inset: 0; overflow: visible; width: 100%; height: 100%; }
+  .fm-question-old, .fm-question-new { position: absolute; inset: 0; padding: var(--v-5) var(--v-6); }
+  .fm-question span { display: block; font-size: var(--vs-label); color: var(--v-ink-soft); }
+  .fm-question p { font-family: var(--vf-body); font-size: 2rem; line-height: 1.2; letter-spacing: -.02em; margin: var(--v-3) 0 0; max-width: 34ch; }
+  .fm-question-new { visibility: hidden; }
+  .fm-question-new em { font-style: normal; background: var(--v-lime); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .fm-criteria { position: absolute; border-block: 1px solid var(--v-line); padding-block: var(--v-3); display: flex; align-items: center; justify-content: space-between; gap: var(--v-4); font-size: var(--vs-label); }
+  .fm-criteria > span { color: var(--v-ink-soft); }
+  .fm-criteria ul { display: flex; flex-wrap: wrap; gap: var(--v-3) var(--v-5); margin: 0; padding: 0; list-style: none; }
+  .fm-criteria li { border-bottom: 2px solid transparent; }
+  .fm-option { padding: var(--v-4); }
+  .fm-option strong { min-height: 44px; }
+  .fm-evidence { position: relative; margin-top: var(--v-4); padding-top: var(--v-3); border-top: 1px solid var(--v-line); font-size: var(--vs-label); line-height: 1.4; }
+  .fm-evidence > span { display: block; min-height: 63px; }
+  .fm-evidence [data-evidence-after] { position: absolute; top: var(--v-3); left: 0; right: 0; visibility: hidden; }
+  .fm-evidence small { display: block; font-size: var(--vs-label); margin-top: var(--v-2); }
+  .fm-loop { border-style: dashed; display: flex; flex-direction: column; gap: var(--v-2); }
+  .fm-loop [data-loop-test] { font-size: var(--vs-label); color: var(--v-ink-soft); }
+  .fm-loop strong { font-size: var(--vs-small); color: var(--v-green); }
+  .fm-outcome { position: absolute; border-top: 2px solid var(--v-green); display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--v-5); padding-top: var(--v-5); }
+  .fm-field h3 { font: 600 var(--vs-label)/1.4 var(--vf-body); margin: 0 0 var(--v-3); }
+  .fm-field p { font: 500 var(--vs-h4)/1.4 var(--vf-body); margin: 0; }
+  .fm-field > span { display: block; color: var(--v-ink-soft); font-size: var(--vs-label); line-height: 1.4; margin-top: var(--v-2); }
+  .fm-field:first-child p { color: var(--v-green); }
+  .fm-outcome .fm-human { grid-column: 1 / -1; display: flex; justify-content: flex-end; align-items: center; gap: var(--v-3); font-size: var(--vs-h3); font-weight: 500; margin: var(--v-3) 0 0; }
+  .fm-human i { width: 12px; height: 12px; border: 2px solid var(--v-green); }
+  .fm-caption { font-size: var(--vs-small); line-height: 1.4; color: var(--v-ink-soft); max-width: 68ch; min-height: 45px; }
+  .fm-controls { display: flex; align-items: center; gap: var(--v-5); font-size: var(--vs-label); }
+  .fm-controls button { background: transparent; color: var(--v-green); border: 0; border-bottom: 1px solid var(--v-green); padding: var(--v-2) 0; font: inherit; cursor: pointer; }
+  .fm-controls button:focus-visible { outline: 2px solid var(--v-green); outline-offset: 4px; }
+  .fm-scroll-hint { color: var(--v-ink-soft); }
+  [data-motion-play] { display: none; }
+  .fm-example { margin: var(--v-5) 0 0; border-top: 1px solid var(--v-line); padding-top: var(--v-4); color: var(--v-ink-soft); font-size: var(--vs-label); line-height: 1.5; }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .fm { display: block; }
+    :global([data-show-static]) .fm-travel { height: auto !important; }
+    :global([data-show-static]) .fm-stage { height: auto; position: static; }
+    :global([data-show-static]) .fm-scene, :global([data-show-static]) .fm-caption, :global([data-show-static]) .fm-example, :global([data-show-static]) [data-motion-play], :global([data-show-static]) .fm-scroll-hint { display: none; }
+    :global([data-show-static]) .fm-controls { margin-bottom: var(--v-5); }
+  }
+  @media (min-width: 1000px) and (min-height: 720px) and (prefers-reduced-motion: no-preference) {
+    .fm { --fm-scene-height: 590px; --fm-stage-height: 690px; }
+    .fm-travel { height: calc(var(--fm-stage-height) + 1100px); }
+    .fm-stage { position: sticky; top: 80px; }
+  }
+  @media (max-width: 999px), (max-height: 719px) {
+    .fm { --fm-scene-height: 720px; --fm-stage-height: 845px; }
+    .fm-stage { display: flex; flex-direction: column; }
+    .fm-scene { flex: 0 0 var(--fm-scene-height); }
+    .fm-controls { order: -1; min-height: 44px; margin-bottom: var(--v-3); }
+    [data-motion-play] { display: inline-block; }
+    .fm-scroll-hint { display: none; }
+    .fm-controls { gap: var(--v-5); flex-wrap: wrap; }
+    .fm-controls button { min-height: 44px; }
+    .fm-criteria { align-items: flex-start; flex-direction: column; gap: var(--v-2); }
+    .fm-criteria ul { gap: var(--v-2) var(--v-4); }
+    .fm-inputs { grid-template-columns: 1fr 1fr; padding-top: 0; gap: var(--v-4); }
+    .fm-node { padding: var(--v-4); }
+    .fm-question-old, .fm-question-new { padding: var(--v-4); }
+    .fm-question p { font-size: 1.5rem; }
+    .fm-option strong { font-size: 1rem; }
+    .fm-outcome { grid-template-columns: 1fr 1fr; gap: var(--v-5); padding-top: var(--v-4); }
+    .fm-field p { font-size: 1rem; }
+    .fm-field h3 { margin-bottom: var(--v-2); }
+    .fm-outcome .fm-human { justify-content: flex-start; margin-top: 0; }
+  }
+</style>

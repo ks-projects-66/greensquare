@@ -2,7 +2,7 @@
 import { withBase } from '../lib/paths';
 import BaseLayoutV2 from '../layouts/BaseLayoutV2.astro';
 import EmailCaptureForm from '../components/EmailCaptureForm.tsx';
-import ThroughFlowHero from '../components/ThroughFlowHero.astro';
+import FrameProcessAnimation from '../components/FrameProcessAnimation.astro';
 
 const capabilities = [
   { label: 'Clarify', title: 'Define the decision before solving it', body: 'Frame identifies the mandate, decision owner, stakes and evidence needed before a recommendation can be credible.' },
@@ -30,8 +30,8 @@ const capabilities = [
   </section>
 
   <div class="v-container">
-    <div class="v-hero__visual v-hero__visual--passage">
-      <ThroughFlowHero />
+    <div class="v-hero__visual">
+      <FrameProcessAnimation animated />
     </div>
   </div>
 
