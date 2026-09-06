@@ -49,19 +49,16 @@
   --vf-brand: 'Manrope', 'Manrope Fallback', Arial, sans-serif;
   --v-font-display: var(--vf-display);
 
-  /* larger reading text, quieter headings.
-     The display cap is 4rem, which is 64px, matching what Anthropic and OpenAI both
-     render for a page title. Guideline V5.1 says 48 to 56px; that is below every
-     comparator and the larger size is a recorded deviation, not drift.
-     h3 is the guideline's Subheading tier: IBM Plex Sans Semibold, 21 to 24px. */
-  --vs-display: clamp(2.65rem, 4.5vw, 4rem);
+  /* The public site follows the guideline's 48 to 56px page-title range and its
+     18 to 20px reading range. H3 remains the IBM Plex Sans subheading tier. */
+  --vs-display: clamp(2.55rem, 4.1vw, 3.5rem);
   --vs-h1: clamp(2.15rem, 3.5vw, 3.35rem);
   --vs-h2: clamp(1.65rem, 2.5vw, 2.45rem);
   --vs-h3: 1.3125rem;
   --vs-h4: 1.0625rem;
-  --vs-lead: clamp(1.18rem, 1.55vw, 1.4rem);
-  --vs-body: clamp(1rem, 0.96rem + 0.18vw, 1.075rem);
-  --vs-small: clamp(0.96rem, 0.93rem + 0.1vw, 1rem);
+  --vs-lead: clamp(1.2rem, 1.45vw, 1.375rem);
+  --vs-body: clamp(1.125rem, 1.08rem + 0.18vw, 1.1875rem);
+  --vs-small: 1rem;
   /* 15px. Was 0.82rem, or 11.5px, which is smaller than every label on the comparator
      sites and was the loudest signal that this page did not belong beside them.
      Guideline V5.1 specifies 14 to 17px for labels. */

@@ -77,6 +77,8 @@ import SectionNav from '../components/SectionNav.astro';
 <style>
   .research-hero h1 { max-width:12ch; }
   .research-hero .v-lead { max-width:48rem; }
+  .research-hero { padding-bottom:var(--v-6); }
+  :global(.research-hero + .section-nav) { margin-top:0; margin-bottom:var(--v-6); }
   .finding-grid, .record-grid, .next-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(18rem,.75fr); gap:clamp(3rem,8vw,8rem); align-items:start; }
   .finding-copy p { font-size:clamp(1.05rem,2vw,1.3rem); }
   .finding-copy .v-link { display:inline-block; margin-top:1rem; }

@@ -4,6 +4,12 @@ import { frameProcess as story } from '../data/frame-process';
 <div class="fm" data-frame-motion>
   <div class="fm-travel" data-motion-travel>
     <div class="fm-stage" data-motion-stage>
+      <div class="fm-controls">
+        <span class="fm-player-label">Frame in action</span>
+        <span class="fm-progress" aria-hidden="true"><i></i></span>
+        <button type="button" data-motion-play>Pause animation</button>
+        <button type="button" data-motion-read aria-expanded="false">Read the full explanation</button>
+      </div>
       <div class="fm-scene" data-motion-scene aria-hidden="true">
         <svg class="fm-routes" data-motion-routes focusable="false">
           <path data-route="inputs" />
@@ -47,11 +53,6 @@ import { frameProcess as story } from '../data/frame-process';
         </div>
       </div>
       <div class="fm-caption" data-motion-caption aria-hidden="true">{story.states[0].caption}</div>
-      <div class="fm-controls">
-        <span class="fm-scroll-hint">Scroll to follow the decision</span>
-        <button type="button" data-motion-play>Pause explanation</button>
-        <button type="button" data-motion-read aria-expanded="false">Read the full explanation</button>
-      </div>
     </div>
   </div>
   <p class="fm-example">Illustrative business situation. The capacity finding shows how new evidence can change a direction.</p>
@@ -62,8 +63,9 @@ import { frameProcess as story } from '../data/frame-process';
   if (import.meta.hot) import.meta.hot.dispose(stop);
 </script>
 <style>
-  .fm { display: none; --fm-scene-height: 650px; --fm-stage-height: 750px; }
-  .fm-stage { height: var(--fm-stage-height); background: var(--v-paper); }
+  .fm { display: none; --fm-scene-height: 590px; }
+  .fm-travel { border: 1px solid var(--v-line); background: var(--v-off); padding: clamp(var(--v-4), 3vw, var(--v-8)); overflow: hidden; }
+  .fm-stage { background: var(--v-off); }
   .fm-scene { position: relative; height: var(--fm-scene-height); isolation: isolate; }
   .fm-routes { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; z-index: -1; }
   .fm-routes path, .fm-question-boundary path { fill: none; stroke: var(--v-ink-soft); stroke-width: 1; vector-effect: non-scaling-stroke; }
@@ -106,32 +108,22 @@ import { frameProcess as story } from '../data/frame-process';
   .fm-field:first-child p { color: var(--v-green); }
   .fm-outcome .fm-human { grid-column: 1 / -1; display: flex; justify-content: flex-end; align-items: center; gap: var(--v-3); font-size: var(--vs-h3); font-weight: 500; margin: var(--v-3) 0 0; }
   .fm-human i { width: 12px; height: 12px; border: 2px solid var(--v-green); }
-  .fm-caption { font-size: var(--vs-small); line-height: 1.4; color: var(--v-ink-soft); max-width: 68ch; min-height: 45px; }
-  .fm-controls { display: flex; align-items: center; gap: var(--v-5); font-size: var(--vs-label); }
+  .fm-caption { border-top: 1px solid var(--v-line); padding-top: var(--v-4); font-size: var(--vs-small); line-height: 1.4; color: var(--v-ink-soft); max-width: 68ch; min-height: 61px; }
+  .fm-controls { display: flex; align-items: center; gap: var(--v-5); min-height: 44px; margin-bottom: var(--v-4); font-size: var(--vs-label); }
+  .fm-player-label { margin-right: auto; color: var(--v-ink); font-weight: 600; }
+  .fm-progress { width: clamp(72px, 10vw, 132px); height: 2px; background: var(--v-line); overflow: hidden; }
+  .fm-progress i { display: block; width: 100%; height: 100%; background: var(--v-green); transform: scaleX(var(--fm-progress, 0)); transform-origin: left; }
   .fm-controls button { background: transparent; color: var(--v-green); border: 0; border-bottom: 1px solid var(--v-green); padding: var(--v-2) 0; font: inherit; cursor: pointer; }
   .fm-controls button:focus-visible { outline: 2px solid var(--v-green); outline-offset: 4px; }
-  .fm-scroll-hint { color: var(--v-ink-soft); }
-  [data-motion-play] { display: none; }
   .fm-example { margin: var(--v-5) 0 0; border-top: 1px solid var(--v-line); padding-top: var(--v-4); color: var(--v-ink-soft); font-size: var(--vs-label); line-height: 1.5; }
   @media (prefers-reduced-motion: no-preference) {
     :global(.js) .fm { display: block; }
-    :global([data-show-static]) .fm-travel { height: auto !important; }
-    :global([data-show-static]) .fm-stage { height: auto; position: static; }
-    :global([data-show-static]) .fm-scene, :global([data-show-static]) .fm-caption, :global([data-show-static]) .fm-example, :global([data-show-static]) [data-motion-play], :global([data-show-static]) .fm-scroll-hint { display: none; }
-    :global([data-show-static]) .fm-controls { margin-bottom: var(--v-5); }
-  }
-  @media (min-width: 1000px) and (min-height: 720px) and (prefers-reduced-motion: no-preference) {
-    .fm { --fm-scene-height: 590px; --fm-stage-height: 690px; }
-    .fm-travel { height: calc(var(--fm-stage-height) + 1100px); }
-    .fm-stage { position: sticky; top: 80px; }
+    :global([data-show-static]) .fm-scene, :global([data-show-static]) .fm-caption, :global([data-show-static]) .fm-example, :global([data-show-static]) [data-motion-play], :global([data-show-static]) .fm-player-label { display: none; }
+    :global([data-show-static]) .fm-progress { display: none; }
+    :global([data-show-static]) .fm-controls { margin: 0; }
   }
   @media (max-width: 999px), (max-height: 719px) {
-    .fm { --fm-scene-height: 720px; --fm-stage-height: 845px; }
-    .fm-stage { display: flex; flex-direction: column; }
-    .fm-scene { flex: 0 0 var(--fm-scene-height); }
-    .fm-controls { order: -1; min-height: 44px; margin-bottom: var(--v-3); }
-    [data-motion-play] { display: inline-block; }
-    .fm-scroll-hint { display: none; }
+    .fm { --fm-scene-height: 760px; }
     .fm-controls { gap: var(--v-5); flex-wrap: wrap; }
     .fm-controls button { min-height: 44px; }
     .fm-criteria { align-items: flex-start; flex-direction: column; gap: var(--v-2); }
@@ -145,5 +137,10 @@ import { frameProcess as story } from '../data/frame-process';
     .fm-field p { font-size: 1rem; }
     .fm-field h3 { margin-bottom: var(--v-2); }
     .fm-outcome .fm-human { justify-content: flex-start; margin-top: 0; }
+  }
+  @media (max-width: 560px) {
+    .fm-travel { padding: var(--v-4); }
+    .fm-controls { gap: var(--v-3) var(--v-5); }
+    .fm-player-label { flex: 1 0 100%; }
   }
 </style>

@@ -1,8 +1,6 @@
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { frameProcess as story } from '../data/frame-process';
 
-gsap.registerPlugin(ScrollTrigger);
 const DURATION = 12;
 const marks = [0, 1.1, 2.2, 4.15, 5, 6.25, 9.7];
 
@@ -15,42 +13,37 @@ export function mountFrameMotion(root: HTMLElement) {
   const abort = new AbortController();
   const scene = root.querySelector<HTMLElement>('[data-motion-scene]')!;
   const stage = root.querySelector<HTMLElement>('[data-motion-stage]')!;
-  const travel = root.querySelector<HTMLElement>('[data-motion-travel]')!;
   const play = root.querySelector<HTMLButtonElement>('[data-motion-play]')!;
   const caption = root.querySelector<HTMLElement>('[data-motion-caption]')!;
   let current: gsap.core.Timeline | undefined;
-  let trigger: ScrollTrigger | undefined;
-  let compactMode = false;
   let inView = false;
 
   function playIfVisible() {
-    if (!current || !compactMode || manualPause || document.hidden || !inView) return;
-    if (current.progress() < 1) current.play();
+    if (!current || manualPause || document.hidden || !inView) return;
+    current.play();
   }
   play.addEventListener('click', () => {
     if (!current) return;
-    if (current.progress() >= 1) { manualPause = false; current.restart(); }
-    else if (current.paused()) { manualPause = false; current.play(); }
+    if (current.paused()) { manualPause = false; current.play(); }
     else { manualPause = true; current.pause(); }
-    play.textContent = current.paused() ? 'Play explanation' : 'Pause explanation';
+    play.textContent = current.paused() ? 'Play animation' : 'Pause animation';
   }, { signal: abort.signal });
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden && compactMode) current?.pause();
+    if (document.hidden) current?.pause();
     else playIfVisible();
   }, { signal: abort.signal });
 
   mm.add({ all: '(min-width: 0px)', desktop: '(min-width: 1000px) and (min-height: 720px)', reduced: '(prefers-reduced-motion: reduce)' }, context => {
     if (context.conditions!.reduced) return;
     const desktop = Boolean(context.conditions!.desktop);
-    compactMode = !desktop;
     let width = 0;
     let rebuildTimer: ReturnType<typeof setTimeout>;
     let animationContext: gsap.Context | undefined;
     const visibility = new IntersectionObserver(entries => {
-      inView = entries[0].isIntersecting && entries[0].intersectionRatio >= .65;
-      if (!inView && !desktop) current?.pause();
+      inView = entries[0].isIntersecting && entries[0].intersectionRatio >= .35;
+      if (!inView) current?.pause();
       else playIfVisible();
-    }, { threshold: .65 });
+    }, { threshold: .35 });
 
     function build() {
       progress = current?.progress() ?? progress;
@@ -143,15 +136,16 @@ export function mountFrameMotion(root: HTMLElement) {
         gsap.set(inputs, { autoAlpha: 1 });
         gsap.set(boundary, { stroke: ink, strokeWidth: 1 });
 
-        const tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' }, onUpdate() {
+        const tl = gsap.timeline({ paused: true, repeat: -1, repeatDelay: 1.2, defaults: { ease: 'power3.out' }, onUpdate() {
           progress = tl.progress();
           const time = tl.time();
           const index = marks.reduce((last, mark, i) => time >= mark ? i : last, 0);
           root.dataset.state = story.states[index].id;
           root.dataset.motionProgress = progress.toFixed(4);
+          root.style.setProperty('--fm-progress', progress.toFixed(4));
           root.dataset.supported = String(time >= 8.1);
           caption.textContent = story.states[index].caption;
-          if (compact) play.textContent = progress >= 1 ? 'Replay explanation' : tl.paused() ? 'Play explanation' : 'Pause explanation';
+          play.textContent = tl.paused() ? 'Play animation' : 'Pause animation';
         } });
         current = tl;
         tl.to({}, { duration: DURATION }, 0);
@@ -210,13 +204,9 @@ export function mountFrameMotion(root: HTMLElement) {
         tl.fromTo(q('[data-motion-human]'), { autoAlpha: 0, y: 6 }, { autoAlpha: 1, y: 0, duration: .4 }, 10.7);
 
         tl.progress(progress);
-        if (desktop) {
-          trigger = ScrollTrigger.create({ id: `${root.id}-process`, trigger: travel, start: 'top 80px', end: '+=1100', scrub: .3, animation: tl, invalidateOnRefresh: true });
-        } else {
-          playIfVisible();
-        }
+        playIfVisible();
         root.dataset.motionReady = 'true';
-        root.dataset.motionMode = desktop ? 'scroll' : 'play';
+        root.dataset.motionMode = 'loop';
       }, scene);
     }
     build();
@@ -230,14 +220,15 @@ export function mountFrameMotion(root: HTMLElement) {
     return () => {
       visibility.disconnect(); resize.disconnect(); clearTimeout(rebuildTimer);
       progress = current?.progress() ?? progress;
-      animationContext?.revert(); current = undefined; trigger = undefined;
+      animationContext?.revert(); current = undefined;
     };
   });
 
   return () => {
     if (disposed) return;
     disposed = true;
-    abort.abort(); mm.revert(); trigger?.kill();
+    abort.abort(); mm.revert();
     delete root.dataset.motionReady; delete root.dataset.motionMode; delete root.dataset.motionProgress; delete root.dataset.supported;
+    root.style.removeProperty('--fm-progress');
   };
 }
