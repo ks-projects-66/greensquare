@@ -193,25 +193,23 @@ html:has(.v2) { scroll-behavior: smooth; color-scheme: light; }
 .v-prose li::marker { color: var(--v-green); }
 .v-prose a { text-decoration: underline; text-underline-offset: 3px; }
 
-/* ---------- heroes: two archetypes, because the reader arrives twice over ----------
-   A marketing page is answering "is this for me", so its opening is a claim: centred,
-   the heading carrying the display size, one primary action in view. An evidence page
-   is answering "does this hold", so its opening is a record: left aligned, dateline
-   first, nothing competing with the finding. Six pages were each carrying their own
-   copy of the same padding rule; this is the one place it lives now. */
-.v-hero { padding-block: clamp(5rem, 10vw, 9rem) 0; }
-.v-hero--marketing { text-align: center; }
-.v-hero--marketing > .v-container { display: flex; flex-direction: column; align-items: center; }
-.v-hero--marketing h1 { max-width: 19ch; }
-.v-hero--marketing .v-lead { max-width: 46rem; }
-.v-hero--marketing .v-actions, .v-hero--marketing .hero-actions { justify-content: center; }
-.v-hero--editorial h1 { max-width: 17ch; }
-.v-hero--editorial .v-lead { max-width: 46rem; }
+/* Every public page begins with one complete composition. Centring makes the opening
+   promise unmistakable; editorial material returns to a reading alignment below it. */
+.v-hero { padding-block: clamp(5rem, 9vw, 7rem) clamp(4rem, 7vw, 6rem); text-align: center; }
+.v-hero > .v-container { display: flex; flex-direction: column; align-items: center; }
+.v-hero h1 { max-width: 16ch; }
+.v-hero .v-lead { max-width: 42rem; }
+.v-hero .v-actions, .v-hero .hero-actions { justify-content: center; }
 
 /* The visual sits under the hero rather than beside it, which is what both comparators
    do and what a centred opening requires. The Frame animation fills this slot and
    reserves its own responsive height, so the page does not move as it loads. */
-.v-hero__visual { margin-top: var(--v-10); }
+.v-hero__visual { margin-top: 0; }
+
+@media (max-width: 600px) {
+  .v-hero { padding-block: var(--v-10) var(--v-8); }
+  .v-hero h1 { max-width: 18ch; }
+}
 
 /* ---------- nav: white, so the page opens on the canvas it is built on ----------
    The nav was a near-black block above every page, which made the first thing the reader

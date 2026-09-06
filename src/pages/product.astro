@@ -30,6 +30,16 @@ const method = [
       </div>
     </section>
 
+    <section class="v-section" id="demo">
+      <div class="v-container">
+        <div class="demo-head">
+          <h2>See the decision change as the evidence changes.</h2>
+          <p>Move through an illustrative decision, the adaptive interrogation and the resulting Decision Brief.</p>
+        </div>
+        <ProductDemo />
+      </div>
+    </section>
+
     <section class="v-section">
       <div class="v-container method-grid">
         <div class="method-intro">
@@ -40,16 +50,6 @@ const method = [
             <li><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{title}</h3><p>{copy}</p></div></li>
           ))}
         </ol>
-      </div>
-    </section>
-
-    <section class="v-section" id="demo">
-      <div class="v-container">
-        <div class="demo-head">
-          <h2>See the decision change as the evidence changes.</h2>
-          <p>Move through an illustrative decision, the adaptive interrogation and the resulting Decision Brief.</p>
-        </div>
-        <ProductDemo />
       </div>
     </section>
 
@@ -92,7 +92,7 @@ const method = [
 </BaseLayoutV2>
 
 <style>
-  h1 { max-width:19ch; }
+  h1 { max-width:16ch; }
   .v-lead { max-width:40rem; }
   .method-grid { display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(3rem,9vw,9rem); align-items:start; }
   .method-intro { position:sticky; top:8rem; }
@@ -101,7 +101,8 @@ const method = [
   .method-grid li > span { color:var(--v-green); font:600 var(--vs-label)/1 var(--vf-body); font-variant-numeric:tabular-nums; padding-top:.35rem; }
   .method-grid h3, .method-grid p { margin:0; }
   .method-grid p { color:var(--v-ink-soft); margin-top:.35rem; }
-  .demo-head { max-width:47rem; margin-bottom:3rem; }
+  .demo-head { max-width:47rem; margin:0 auto 3rem; text-align:center; }
+  .demo-head > p { margin-inline:auto; }
   .demo-head > p:last-child { color:var(--v-ink-soft); }
   .boundary { max-width:62rem; }
   .plans-head { max-width:45rem; margin-bottom:3rem; }

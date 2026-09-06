@@ -1,11 +1,13 @@
+const base = process.env.QA_BASE_URL || 'http://127.0.0.1:4321';
+
 module.exports = {
   ci: {
     collect: {
       url: [
-        'http://127.0.0.1:4321/',
-        'http://127.0.0.1:4321/product/',
-        'http://127.0.0.1:4321/free/',
-        'http://127.0.0.1:4321/research/',
+        `${base}/`,
+        `${base}/product/`,
+        `${base}/free/`,
+        `${base}/research/`,
       ],
       numberOfRuns: 1,
       settings: { chromeFlags: '--no-sandbox --headless=new' },

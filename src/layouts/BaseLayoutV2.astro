@@ -3,6 +3,12 @@ import { withBase } from '../lib/paths';
 import Analytics from '@vercel/analytics/astro';
 import NavV2 from '../components/NavV2.astro';
 import FooterV2 from '../components/FooterV2.astro';
+import '@fontsource/ibm-plex-sans/latin-400.css';
+import '@fontsource/ibm-plex-sans/latin-500.css';
+import '@fontsource/ibm-plex-sans/latin-600.css';
+import '@fontsource/ibm-plex-sans/latin-700.css';
+import '@fontsource/space-grotesk/latin-600.css';
+import '@fontsource/manrope/latin-600.css';
 import '../styles/global-v2.css';
 
 export interface Props {
@@ -40,35 +46,6 @@ const ogImage = new URL(withBase('/assets/og-image.png'), Astro.site).toString()
     <link rel="icon" href={withBase('/assets/favicon.svg')} type="image/svg+xml" />
     <link rel="icon" href={withBase('/favicon.ico')} sizes="48x48" />
     <link rel="apple-touch-icon" href={withBase('/assets/apple-touch-icon.png')} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Three faces, matching the design language and nothing more. IBM Plex Mono is gone:
-         it was not in the guideline, and it was being asked for at weight 700 while only
-         400 and 500 were loaded, so the browser synthesised the bold. Space Grotesk ships
-         Semibold alone, which is the only weight the guideline gives it.
-
-         The two faces load with different `display` values on purpose, which is why this
-         is two requests rather than one.
-
-         Reading text swaps. A paragraph reflowing costs a little shift and the reader
-         genuinely wants the brand face for the text they spend their time in.
-
-         Headings do not swap. Space Grotesk sets h1 and h2 only: a handful of large words
-         under `text-wrap: balance`, where a small change in glyph advance moves a wrap
-         point, changes the line count and moves everything below the heading. On /free/
-         that measured 0.105 CLS against a 0.1 budget. The metric-matched fallbacks cannot
-         reach it, because they correct the line box, not where a line breaks. With
-         `optional` the heading either has the face from the first paint or keeps the
-         fallback for that visit, and never moves either way. The face is still fetched and
-         cached, so the second visit has it. -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Manrope:wght@600&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&display=optional"
-      rel="stylesheet"
-    />
   </head>
   <body class="v2 brand-site">
     <a class="skip-link" href="#main">Skip to content</a>

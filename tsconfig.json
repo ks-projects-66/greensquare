@@ -2,7 +2,7 @@
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
   "//": "The excludes after `legacy` are gitignored local output. CI never checks them out, so leaving them in scope made `astro check` pass on CI and exhaust memory locally on the same commit.",
-  "exclude": ["dist", "legacy", "ds-bundle", ".ds-sync", ".design-sync", "qa/launch"],
+  "exclude": ["dist", "legacy", "ds-bundle", ".ds-sync", ".design-sync", "qa/launch", "_qa", ".lighthouseci"],
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "react"
