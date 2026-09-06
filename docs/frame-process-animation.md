@@ -6,7 +6,7 @@ Status: static storyboard approved; motion implemented and deployed to the PR #2
 
 The feature began from `refine/recomposition` at `0d6039b`. Its latest changes through `ee440ea` are merged, including the centred marketing hero, shared spacing and typography work, and explicit below-hero animation slot. Compare the feature against `refine/recomposition` to isolate animation scope from the wider website changes.
 
-The homepage keeps the centred hero, copy and calls to action and renders `<FrameProcessAnimation animated />` in the below-hero `v-hero__visual` slot. The responsive component supplies its dimensions. The legacy `ThroughFlowHero` is unused but retained until final deployment approval; check repository-wide imports before retiring it. Frozen evidence and demonstration records are untouched by this feature.
+The homepage keeps the centred hero, copy and calls to action and renders `<FrameProcessAnimation animated />` in the below-hero `v-hero__visual` slot. The responsive component supplies its dimensions. The legacy `ThroughFlowHero` component and the `v-hero__visual--passage` height it reserved were removed once the animation landed. Frozen evidence and demonstration records are untouched by this feature.
 
 ## Files and responsibilities
 
