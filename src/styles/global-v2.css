@@ -209,11 +209,9 @@ html:has(.v2) { scroll-behavior: smooth; color-scheme: light; }
 .v-hero--editorial .v-lead { max-width: 46rem; }
 
 /* The visual sits under the hero rather than beside it, which is what both comparators
-   do and what a centred opening requires. ThroughFlowHero is preserved here as-is and
-   is not the final artwork: the Frame animation replaces it, and the slot is sized for
-   that now so the page does not move when it lands. */
+   do and what a centred opening requires. The Frame animation fills this slot and
+   reserves its own responsive height, so the page does not move as it loads. */
 .v-hero__visual { margin-top: var(--v-10); }
-.v-hero__visual--passage { height: clamp(320px, 46vw, 700px); }
 
 /* ---------- nav: white, so the page opens on the canvas it is built on ----------
    The nav was a near-black block above every page, which made the first thing the reader
